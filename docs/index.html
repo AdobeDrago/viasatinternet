@@ -1,0 +1,184 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Viasat Internet — EDS handover</title><style>
+:root{--bg:#fff;--fg:#141d24;--muted:#576775;--line:#dfe7ec;--accent:#00768f;--light:#fff6e1;--card:#f2f5f8;--ok:#0b7a3b;--warn:#b45309}
+@media (prefers-color-scheme:dark){:root{--bg:#141d24;--fg:#f2f5f8;--muted:#a9b8c4;--line:#32424e;--accent:#43bfd6;--light:#1d2a33;--card:#1d2a33;--ok:#4ade80;--warn:#fbbf24}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font:16px/1.55 system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:var(--accent)}code{background:var(--card);padding:1px 5px;border-radius:4px;font-size:.9em}
+.layout{display:grid;grid-template-columns:260px 1fr;min-height:100vh}
+nav.side{position:sticky;top:0;align-self:start;height:100vh;overflow:auto;padding:24px 16px;border-right:1px solid var(--line);background:var(--card)}
+nav.side h1{font-size:1rem;margin:0 0 4px}nav.side small{color:var(--muted)}
+nav.side h2{font-size:.72rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:20px 0 6px}
+nav.side a{display:block;padding:4px 8px;border-radius:6px;color:var(--fg);text-decoration:none;font-size:.92rem}
+nav.side a:hover{background:var(--line)}
+main{max-width:980px;padding:32px 40px 80px}
+section{padding-top:24px;margin-bottom:24px;border-bottom:1px solid var(--line)}
+h2{margin:0 0 12px;font-size:1.5rem}h3{margin:20px 0 8px;font-size:1.1rem}
+.badge{display:inline-block;background:var(--light);border:1px solid var(--line);padding:2px 10px;border-radius:99px;font-size:.85rem}
+.stats{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:16px 0}
+.stat{background:var(--card);border-radius:12px;padding:12px 14px}.stat b{display:block;font-size:1.6rem}.stat span{color:var(--muted);font-size:.85rem}
+table{width:100%;border-collapse:collapse;margin:12px 0;font-size:.92rem}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:.8rem;text-transform:uppercase;letter-spacing:.04em}
+td.ok{color:var(--ok);font-weight:600}td.warn{color:var(--warn);font-weight:600}
+.note{background:var(--light);border-left:4px solid var(--accent);padding:10px 14px;border-radius:6px;margin:12px 0}
+.swatch{display:inline-block;width:14px;height:14px;border-radius:3px;border:1px solid var(--line);vertical-align:-2px;margin-right:6px}
+@media(max-width:800px){.layout{grid-template-columns:1fr}nav.side{position:static;height:auto}main{padding:20px}}
+</style></head>
+<body><div class="layout">
+<nav class="side"><h1>Viasat Internet</h1><small>viasatinternet.com → EDS · Site handover</small>
+<h2>Handover</h2><a href="#overview">Overview</a><a href="#use-case">Use case &amp; requirements</a><a href="#references">Key references</a><a href="#deliverables">Deliverables</a>
+<h2>DA.live content</h2><a href="#pages">Pages in DA.live</a><a href="#nav">Navigation &amp; links</a><a href="#header-footer">Header &amp; footer</a><a href="#blocks">Content blocks</a><a href="#brand">Brand design system</a>
+<h2>GitHub</h2><a href="#github">GitHub implementation</a>
+<h2>Quality</h2><a href="#parity">Parity gate &amp; results</a>
+<h2>Handoff</h2><a href="#decisions">Decisions &amp; assumptions</a><a href="#limits">Known limitations</a><a href="#next">Next steps</a>
+<h2>Reference</h2><a href="#dev">Developer notes</a></nav>
+<main>
+<section id="overview"><span class="badge">Home page migrated · PR open · pending QA</span>
+<h2>Viasat Internet on Edge Delivery Services</h2>
+<p>The viasatinternet.com home page, header and footer rebuilt as native EDS blocks. Brand fonts, colors, favicon and logo are on <code>main</code>; the block rebuild is in <a href="https://github.com/AdobeDrago/viasatinternet/pull/1">PR #1</a> (branch <code>viasat-home</code>), not yet merged.</p>
+<div class="stats">
+<div class="stat"><b>3</b><span>DA documents (index, nav, footer)</span></div>
+<div class="stat"><b>6</b><span>Blocks built or changed</span></div>
+<div class="stat"><b>1</b><span>New block (accordion)</span></div>
+<div class="stat"><b>17/18</b><span>Parity checks ≥ 99% pixel</span></div>
+<div class="stat"><b>0/1</b><span>PRs merged</span></div>
+<div class="stat"><b>6</b><span>Commits on branch</span></div></div></section>
+
+<section id="use-case"><h2>Use case &amp; requirements</h2>
+<table><tr><th>Area</th><th>What is built</th></tr>
+<tr><td>Scope</td><td>Home page plus shared <code>/nav</code> and <code>/footer</code> fragments. Other pages are not migrated.</td></tr>
+<tr><td>Visual language</td><td>Uni Neue headings and Source Sans Pro body; dark navy (#141d24), cream section background (#fff6e1), teal links (#00768f), orange gradient buttons.</td></tr>
+<tr><td>Header</td><td>Dark 44px utility bar (Personal / Small business / My Viasat) and a 92px transparent nav bar overlaid on the hero, with logo, five links and a "Call 1-855-393-3302" button.</td></tr>
+<tr><td>Home sections</td><td>Hero with address field · order banner · three "stay connected" cards · "why people choose" carousel · satellite-dish banner · FAQ · legal text.</td></tr>
+<tr><td>Images</td><td>Kept on the source CDN (Scene7 and viasatinternet.com), authored as links.</td></tr>
+<tr><td>Interactive</td><td>Carousel arrows, FAQ expand/collapse and mobile menu are built but not pixel-gated.</td></tr></table></section>
+
+<section id="references"><h2>Key references</h2>
+<table><tr><th>What</th><th>URL</th><th>Notes</th></tr>
+<tr><td>Preview (branch)</td><td><a href="https://viasat-home--viasatinternet--adobedrago.aem.page/">https://viasat-home--viasatinternet--adobedrago.aem.page/</a></td><td>Branch <code>viasat-home</code>, content from DA</td></tr>
+<tr><td>Preview (main)</td><td><a href="https://main--viasatinternet--adobedrago.aem.page/">https://main--viasatinternet--adobedrago.aem.page/</a></td><td>Shows the rebuild only after PR #1 is merged</td></tr>
+<tr><td>Live</td><td><a href="https://main--viasatinternet--adobedrago.aem.live/">https://main--viasatinternet--adobedrago.aem.live/</a></td><td>Not published yet</td></tr>
+<tr><td>Authoring</td><td><a href="https://da.live/#/adobedrago/viasatinternet">https://da.live/#/adobedrago/viasatinternet</a></td><td>Org adobedrago, site viasatinternet</td></tr>
+<tr><td>Code</td><td><a href="https://github.com/AdobeDrago/viasatinternet">AdobeDrago/viasatinternet</a></td><td>Blocks, styles, <code>import-work/</code> ledger</td></tr>
+<tr><td>Pull request</td><td><a href="https://github.com/AdobeDrago/viasatinternet/pull/1">PR #1</a></td><td>Home page rebuild</td></tr>
+<tr><td>Production</td><td><a href="https://www.viasatinternet.com/">viasatinternet.com</a></td><td>Source site being migrated</td></tr></table></section>
+
+<section id="deliverables"><h2>Deliverables</h2>
+<table><tr><th>Item</th><th>Status</th></tr>
+<tr><td>Repository from aem-boilerplate</td><td>Done — AdobeDrago/viasatinternet</td></tr>
+<tr><td>Brand setup (fonts, colors, nav height, favicon, logo)</td><td>Done — on <code>main</code></td></tr>
+<tr><td>/nav and /footer fragments in DA</td><td>Done — published to branch preview</td></tr>
+<tr><td>Home page in DA</td><td>Done — 7 sections plus metadata</td></tr>
+<tr><td>Inner pages</td><td>Not started (nav links point to pages that do not exist yet)</td></tr>
+<tr><td>Block code</td><td>Done — in PR #1</td></tr>
+<tr><td>Parity ledger</td><td>Done — <code>import-work/ledger.md</code></td></tr>
+<tr><td>Pull request merged</td><td>Not yet</td></tr>
+<tr><td>Published to .aem.live</td><td>Not yet</td></tr>
+<tr><td>QA sign-off</td><td>Pending</td></tr></table></section>
+
+<section id="pages"><h2>Pages in DA.live</h2>
+<table><tr><th>Document</th><th>Path</th><th>Contents</th></tr>
+<tr><td>Home</td><td><code>/index</code></td><td>7 sections: hero (search), order banner (hero banner), stay-connected (columns media ×2 + badge), why-choose (heading + cards carousel), keeps-you-connected (hero center), FAQ (heading + accordion), legal text. Metadata: title, template <code>viasat</code>.</td></tr>
+<tr><td>Nav fragment</td><td><code>/nav</code></td><td>5 sections: utility links, utility end link, logo, main links, call button. <code>robots: noindex</code>.</td></tr>
+<tr><td>Footer fragment</td><td><code>/footer</code></td><td>2 sections: logo + four link columns, legal row. <code>robots: noindex</code>.</td></tr></table>
+<div class="note">Section styles are authored with a Section Metadata block: <code>light</code>, <code>compact</code>, <code>dark</code>, <code>pad</code>, <code>center</code>, <code>legal</code>.</div></section>
+
+<section id="nav"><h2>Navigation &amp; links</h2>
+<table><tr><th>Label</th><th>Target</th></tr><tr><td>Satellite internet</td><td><code>/satellite-internet/</code></td></tr>
+<tr><td>Plans</td><td><code>/satellite-internet/plans/</code></td></tr>
+<tr><td>Installation</td><td><code>/satellite-internet/installation/</code></td></tr>
+<tr><td>Add-ons</td><td><code>/satellite-internet/add-ons/</code></td></tr>
+<tr><td>Support</td><td><code>https://www.viasat.com/satellite-internet/help/</code></td></tr>
+</table>
+<p>Utility links: Personal (<code>/</code>), Small business (viasat.com small-business page), My Viasat (my.viasat.com). Phone: <code>tel:18553933302</code>.</p>
+<div class="note">Plans, Installation, Add-ons and Satellite internet pages are not migrated, so those links return 404 on the EDS site until those pages are built.</div></section>
+
+<section id="header-footer"><h2>Header &amp; footer</h2>
+<p><b>Header.</b> <code>header</code> block loads <code>/nav</code>; the 5 fragment sections become utility links, utility end, brand, main links and tools. Desktop (≥900px): fixed header, utility bar 44px, main bar 92px with gradient. Below 900px: 64px bar with a menu button. The logo is the white SVG <code>/icons/logo.svg</code> authored as <code>:logo:</code>.</p>
+<p><b>Footer.</b> <code>footer</code> block loads <code>/footer</code>: logo, four columns (Get Viasat, Explore, Support, Follow us) and a legal row (copyright, Legal, Privacy, Do not sell or share, Accessibility). The "Do not sell or share" link is a placeholder <code>#</code>.</p></section>
+
+<section id="blocks"><h2>Content blocks</h2>
+<table><tr><th>Block</th><th>Status</th><th>Variants</th><th>Notes</th></tr><tr><td><code>header</code></td><td>Rewritten</td><td>—</td><td>Fixed header: 44px dark utility bar plus a 92px nav bar overlaid on the hero. Reads the /nav fragment (5 sections). Mobile menu toggle.</td></tr>
+<tr><td><code>footer</code></td><td>Rewritten</td><td>—</td><td>Brand logo, four link columns and a legal row, from the /footer fragment.</td></tr>
+<tr><td><code>hero</code></td><td>Rewritten</td><td>search, banner, center</td><td>Image link in row 1, content in row 2. search = home hero with address field; banner = rounded offer card with two columns; center = full-bleed image with centered copy.</td></tr>
+<tr><td><code>columns</code></td><td>Extended</td><td>media, reverse, badge</td><td>media = white rounded card with image beside a text stack (checklist and legal lines are detected from &quot;✓&quot; and &quot;*&quot; prefixes); reverse swaps sides; badge = award image beside a heading.</td></tr>
+<tr><td><code>cards</code></td><td>Extended</td><td>carousel</td><td>Horizontally scrolling cards with prev/next buttons. Row = image link cell + text cell (bold title, description).</td></tr>
+<tr><td><code>accordion</code></td><td>New</td><td>—</td><td>FAQ built on details/summary. Each row is a question cell and an answer cell.</td></tr>
+</table>
+<p>Helpers: <code>scripts/media.js</code> and <code>scripts/template.js</code> (from the parity-rebuild starter), and <code>scripts/scene7.js</code>, which builds the source's per-breakpoint Scene7 image presets. <code>scripts.js</code> configures them and adds arrow icons to buttons.</p></section>
+
+<section id="brand"><h2>Brand design system</h2>
+<table><tr><th>Token</th><th>Value</th></tr>
+<tr><td>Background</td><td><span class="swatch" style="background:#fff"></span>#ffffff</td></tr>
+<tr><td>Text and dark</td><td><span class="swatch" style="background:#141d24"></span>#141d24</td></tr>
+<tr><td>Light section</td><td><span class="swatch" style="background:#fff6e1"></span>#fff6e1</td></tr>
+<tr><td>Link and hover</td><td><span class="swatch" style="background:#00768f"></span>#00768f</td></tr>
+<tr><td>Button gradient</td><td>111.19deg, #df6901 → #ffb029</td></tr>
+<tr><td>Body font</td><td>"Source Sans Pro" 400/600/700 (self-hosted)</td></tr>
+<tr><td>Heading font</td><td>"Uni Neue" 700/800 (self-hosted, proprietary)</td></tr>
+<tr><td>Body sizes</td><td>16 / 14 / 14px</td></tr>
+<tr><td>Heading sizes (desktop)</td><td>40 / 32 / 28 / 22 / 20 / 18px</td></tr>
+<tr><td>Heading sizes (mobile)</td><td>28 / 28 / 24.55 / 24.55 / 24 / 22px</td></tr>
+<tr><td>Nav height</td><td>92px desktop, 64px mobile</td></tr></table>
+<div class="note"><b>Licensing:</b> Uni Neue is proprietary. <code>styles/fonts.css</code> carries a "FONT LICENSING REQUIRED BEFORE GOING LIVE" comment. Confirm the licence before publishing live.</div></section>
+
+<section id="github"><h2>GitHub implementation</h2>
+<table><tr><th>Item</th><th>Detail</th></tr>
+<tr><td>Repository</td><td><a href="https://github.com/AdobeDrago/viasatinternet">AdobeDrago/viasatinternet</a></td></tr>
+<tr><td>Branches</td><td><code>main</code> (brand setup), <code>viasat-home</code> (home page rebuild, PR #1)</td></tr>
+<tr><td>Commits on <code>viasat-home</code></td><td>6 total (including the docs commit)</td></tr>
+<tr><td>Key files</td><td><code>blocks/{header,footer,hero,columns,cards,accordion}</code>, <code>scripts/{scripts,media,template,scene7}.js</code>, <code>styles/{styles,fonts}.css</code>, <code>icons/logo.svg</code></td></tr>
+<tr><td>Not served</td><td><code>import-work/</code> and <code>node_modules/</code> are in <code>.hlxignore</code>; <code>*.md</code> is already ignored</td></tr></table></section>
+
+<section id="parity"><h2>Parity gate &amp; results</h2>
+<p>Each section was compared to the source site at 1440px and 1280px. Bar: pixel match ≥ 99% and 0 computed-style mismatches. Results from the branch preview:</p>
+<table><tr><th>Section</th><th>Pixel 1440</th><th>Pixel 1280</th><th>Style mism. 1440</th><th>Style mism. 1280</th></tr>
+<tr><td>Header (utility bar)</td><td class="ok">100%</td><td class="ok">100%</td><td>21</td><td>21</td></tr>
+<tr><td>Hero</td><td class="ok">99.15%</td><td class="warn">98.85%</td><td>25</td><td>25</td></tr>
+<tr><td>Order banner</td><td class="ok">99.58%</td><td class="ok">99.41%</td><td>26</td><td>26</td></tr>
+<tr><td>Stay connected (3 cards)</td><td class="ok">99.37%</td><td class="ok">99.19%</td><td>67</td><td>67</td></tr>
+<tr><td>Why choose (carousel)</td><td class="ok">99.95%</td><td class="ok">99.94%</td><td>20</td><td>20</td></tr>
+<tr><td>Satellite internet keeps you connected</td><td class="ok">99.88%</td><td class="ok">99.82%</td><td>21</td><td>21</td></tr>
+<tr><td>FAQ</td><td class="ok">100%</td><td class="ok">100%</td><td>3</td><td>3</td></tr>
+<tr><td>Promo and legal text</td><td class="ok">99.98%</td><td class="ok">99.98%</td><td>26</td><td>26</td></tr>
+<tr><td>Footer</td><td class="ok">99.67%</td><td class="ok">99.63%</td><td>73</td><td>73</td></tr>
+</table>
+<p><b>17 of 18</b> checks meet the pixel bar. All 18 sections sit at the same page position as the source (offsets check). <code>npm run lint</code> is clean.</p>
+<div class="note"><b>Why style mismatches remain:</b> the source builds its buttons and text with web components (<code>bm-button</code>, <code>bm-text</code>) styled inside shadow DOM, and its legal text as inline spans. The checker reads their unstyled host values (Times, black), so it cannot report 0 even where the visible result matches. Layout, color and position of the visible text were matched.</div></section>
+
+<section id="decisions"><h2>Decisions &amp; assumptions</h2><ul>
+<li>Fonts use the exact family names <code>"Uni Neue"</code> and <code>"Source Sans Pro"</code> so computed fonts match the source; the size-adjusted fallback faces from brand setup were removed.</li>
+<li>Images stay on the source CDN, as chosen at intake. Replacing them with DA-hosted copies is a later option.</li>
+<li>The hero address field is a non-functional look-alike; it does not call Viasat's availability service.</li>
+<li>The carousel shows the 5 unique cards; the source loops duplicates.</li>
+<li>Video: none on this page.</li>
+<li>Nav and footer carry <code>noindex</code>, as in the boilerplate.</li></ul></section>
+
+<section id="limits"><h2>Known limitations</h2><ul>
+<li>Hero at 1280px is 98.85% (target 99%).</li>
+<li>Mobile (375px) is not gated; the hero text overflows the viewport there.</li>
+<li>Hover and open states, FAQ expansion, carousel arrow behaviour and header scroll behaviour are not verified against the source.</li>
+<li>Source footer text boxes are about 6% wider than the rebuild at identical font settings; cause not found.</li>
+<li>Inner pages are not migrated, so most nav links 404.</li>
+<li>The "Do not sell or share my personal information" link is a placeholder.</li></ul></section>
+
+<section id="next"><h2>Next steps</h2><ol>
+<li>Review and merge <a href="https://github.com/AdobeDrago/viasatinternet/pull/1">PR #1</a>; then confirm <a href="https://main--viasatinternet--adobedrago.aem.page/">https://main--viasatinternet--adobedrago.aem.page/</a> matches the branch preview.</li>
+<li>QA the home page, including mobile and the interactive states.</li>
+<li>Resolve Uni Neue font licensing.</li>
+<li>Migrate Plans, Installation, Add-ons and Satellite internet pages (reuse the existing blocks as variants).</li>
+<li>Publish to <a href="https://main--viasatinternet--adobedrago.aem.live/">https://main--viasatinternet--adobedrago.aem.live/</a> when QA passes.</li>
+<li>Revoke the GitHub token and DA token that were shared in chat during the build.</li></ol></section>
+
+<section id="dev"><h2>Developer notes</h2>
+<pre><code>git clone https://github.com/AdobeDrago/viasatinternet.git
+cd viasatinternet &amp;&amp; npm install
+npx -y @adobe/aem-cli up --no-open     # local code, previewed content
+npm run lint</code></pre>
+<p>The parity harness lives in <code>import-work/</code> (config only; bundles and gate output in <code>work/</code> are git-ignored):</p>
+<ul><li><code>site.json</code>, <code>pages.json</code>, <code>gate/home.json</code>: harness config</li>
+<li><code>pages/</code>: one HTML file per section (home, <code>_nav</code>, <code>_footer</code>)</li>
+<li><code>build.py</code> assembles local previews and DA bodies; <code>postbuild.py</code> converts <code>:logo:</code> in the local fragments</li>
+<li><code>gate.js gate/home.json</code> compares against the source; <code>gate/home-branch.json</code> compares against the branch preview</li>
+<li><code>ledger.md</code>: per-section results and decisions</li></ul>
+<p>Tokens go in environment variables only (<code>DA_TOKEN</code>); never in files or commits.</p></section>
+</main></div></body></html>
