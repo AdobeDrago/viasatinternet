@@ -1,0 +1,61 @@
+{
+ "site": "../site.json",
+ "page": "home",
+ "source": "https://www.viasatinternet.com/",
+ "rebuild": "https://viasat-home--viasatinternet--adobedrago.aem.page/",
+ "widths": [
+  1440,
+  1280
+ ],
+ "out": "work/gate/home-branch",
+ "bundle": "../work/bundles/home",
+ "snapshot": null,
+ "timelines": [],
+ "sections": [
+  {
+   "name": "header",
+   "source": "header",
+   "rebuild": "header .header-util"
+  },
+  {
+   "name": "hero",
+   "source": "@sec:1",
+   "rebuild": "main > .section:nth-child(1)"
+  },
+  {
+   "name": "order",
+   "source": "@sec:2",
+   "rebuild": "main > .section:nth-child(2)"
+  },
+  {
+   "name": "stay-connected",
+   "source": "@sec:3",
+   "rebuild": "main > .section:nth-child(3)"
+  },
+  {
+   "name": "why-choose",
+   "source": "@sec:4",
+   "rebuild": "main > .section:nth-child(4)"
+  },
+  {
+   "name": "keeps-you-connected",
+   "source": "@sec:5",
+   "rebuild": "main > .section:nth-child(5)"
+  },
+  {
+   "name": "faq",
+   "source": "@sec:6",
+   "rebuild": "main > .section:nth-child(6)"
+  },
+  {
+   "name": "promo-legal",
+   "source": "@sec:7",
+   "rebuild": "main > .section:nth-child(7)"
+  },
+  {
+   "name": "footer",
+   "source": "footer",
+   "rebuild": "footer .footer"
+  }
+ ]
+}

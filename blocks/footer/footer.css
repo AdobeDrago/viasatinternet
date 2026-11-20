@@ -1,20 +1,129 @@
-footer {
-  background-color: var(--light-color);
-  font-size: var(--body-font-size-xs);
+/* stylelint-disable no-descending-specificity */
+footer .footer {
+  border-top: 1px solid #32424e;
+  background-color: var(--dark-color);
+  color: #dfe7ec;
+  font-size: 14px;
+  line-height: 20px;
 }
 
-footer .footer > div {
-  margin: auto;
+footer .footer-inner {
+  box-sizing: border-box;
   max-width: 1200px;
-  padding: 40px 24px 24px;
+  margin: 0 auto;
+  padding: 64px 24px 61px;
+}
+
+footer .footer-main > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
 }
 
 footer .footer p {
   margin: 0;
 }
 
+footer .footer .footer-brand .icon {
+  display: block;
+  width: 128px;
+  height: 56px;
+}
+
+footer .footer-columns {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 32px 16px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer-columns > li > p:first-child {
+  margin-bottom: 32px;
+  color: #8697a5;
+  font-size: 12px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+footer .footer-columns ul {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer a:any-link {
+  color: #dfe7ec;
+  text-decoration: none;
+}
+
+footer .footer-columns ul a,
+footer .footer-legal a {
+  display: block;
+}
+
+footer .footer-legal {
+  margin-top: 48px;
+  color: #8697a5;
+}
+
+footer .footer-legal > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+footer .footer-legal ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+footer .footer-legal a:any-link {
+  color: #8697a5;
+}
+
+footer .footer-legal li:nth-child(3) a:any-link {
+  color: #fff;
+}
+
+
+footer .footer-legal img {
+  display: block;
+  width: 64px;
+  height: 24px;
+}
+
 @media (width >= 900px) {
-  footer .footer > div {
-    padding: 40px 32px 24px;
+  footer .footer-main > div {
+    grid-template-columns: 208px 1fr;
+    gap: 0;
+  }
+
+  footer .footer-columns {
+    grid-template-columns: 252px 252px 252px 188px;
+    gap: 0;
+  }
+
+  footer .footer-main {
+    margin-bottom: 75px;
+  }
+
+  footer .footer-legal {
+    margin-top: 0;
+  }
+
+  footer .footer-legal > div {
+    flex-wrap: nowrap;
   }
 }

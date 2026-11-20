@@ -1,0 +1,58 @@
+/* stylelint-disable no-descending-specificity */
+.accordion details {
+  border-bottom: 1px solid #32424e;
+}
+
+.accordion details:last-child {
+  border-bottom: 0;
+}
+
+.accordion details:first-child summary {
+  padding-bottom: 18px;
+}
+
+.accordion summary {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  padding: 18px 0 17px;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+  list-style: none;
+  cursor: pointer;
+}
+
+.accordion summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion summary::after {
+  flex: none;
+  width: 24px;
+  height: 24px;
+  background: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath d='M480-344 240-584l56-56 184 184 184-184 56 56-240 240Z'/%3E%3C/svg%3E") center / contain no-repeat;
+  content: '';
+}
+
+.accordion details[open] summary::after {
+  transform: rotate(180deg);
+}
+
+.accordion details:not([open]) .accordion-item-body {
+  display: none;
+}
+
+.accordion .accordion-item-body {
+  padding: 0 0 18px;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+.accordion .accordion-item-body p {
+  margin: 0 0 12px;
+}

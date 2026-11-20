@@ -12,7 +12,7 @@
 
 :root {
   /* colors */
-  --background-color: #ffffff;
+  --background-color: #fff;
   --light-color: #fff6e1;
   --dark-color: #141d24;
   --text-color: #141d24;
@@ -20,8 +20,8 @@
   --link-hover-color: #00768f;
 
   /* fonts */
-  --body-font-family: source-sans-pro, source-sans-pro-fallback, sans-serif;
-  --heading-font-family: uni-neue, uni-neue-fallback, sans-serif;
+  --body-font-family: "Source Sans Pro";
+  --heading-font-family: "Uni Neue";
 
   /* body sizes */
   --body-font-size-m: 16px;
@@ -38,19 +38,6 @@
 
   /* nav height */
   --nav-height: 64px;
-}
-
-/* fallback fonts */
-@font-face {
-  font-family: uni-neue-fallback;
-  size-adjust: 91.1%;
-  src: local('Arial');
-}
-
-@font-face {
-  font-family: source-sans-pro-fallback;
-  size-adjust: 94.23%;
-  src: local('Arial');
 }
 
 @media (width >= 900px) {
@@ -88,7 +75,13 @@ body.appear {
 }
 
 header {
-  height: var(--nav-height);
+  height: 0;
+}
+
+@media (width >= 900px) {
+  header {
+    height: 44px;
+  }
 }
 
 header .header,
@@ -325,4 +318,133 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
+}
+
+
+/* ---- viasat template ---- */
+body.viasat {
+  line-height: 1.5;
+}
+
+body.viasat h1,
+body.viasat h2,
+body.viasat h3,
+body.viasat h4 {
+  margin: 0;
+  text-wrap: balance;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+body.viasat p {
+  margin: 0;
+}
+
+body.viasat main > .section {
+  margin: 0;
+  padding: 0;
+}
+
+body.viasat main > .section > div {
+  box-sizing: border-box;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+body.viasat main .section.light,
+body.viasat main .section.dark,
+body.viasat main .section.pad {
+  padding: 32px 0;
+}
+
+body.viasat main .section.light {
+  background-color: var(--light-color);
+}
+
+body.viasat main .section.legal {
+  padding: 82px 0 78px;
+}
+
+body.viasat main .section.legal p {
+  margin: 0 0 16px;
+  font-size: 12px;
+  line-height: 24px;
+}
+
+body.viasat main .section.legal p:last-child {
+  margin-bottom: 0;
+}
+
+body.viasat main .section.center .default-content-wrapper {
+  text-align: center;
+}
+
+body.viasat main .section.center .default-content-wrapper + div {
+  margin-top: 48px;
+}
+
+body.viasat main .section.dark.center .default-content-wrapper + div {
+  margin-top: 16px;
+}
+
+body.viasat main .section.light .columns-wrapper + .columns-wrapper {
+  margin-top: 48px;
+}
+
+body.viasat main .section.compact {
+  padding: 24px 0;
+}
+
+body.viasat main .section.dark {
+  background-color: var(--dark-color);
+  color: #fff;
+}
+
+body.viasat main .section.dark h1,
+body.viasat main .section.dark h2 {
+  color: #fff;
+}
+
+body.viasat main .section.dark a:any-link {
+  color: #fff;
+  text-decoration: underline;
+}
+
+body.viasat main .section .default-content-wrapper > h2 {
+  font-size: var(--heading-font-size-xl);
+  line-height: 40px;
+}
+
+/* buttons */
+body.viasat a.button:any-link {
+  gap: 12px;
+  height: 48px;
+  box-sizing: border-box;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 16px;
+  background: linear-gradient(111.19deg, #df6901 6.01%, #ffb029 119.04%);
+  color: #fff;
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+body.viasat a.button.secondary:any-link {
+  background: #fff;
+  color: var(--text-color);
+}
+
+body.viasat p.button-wrapper {
+  margin: 0;
+}
+
+body.viasat .viasat-arrow {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  fill: currentcolor;
 }

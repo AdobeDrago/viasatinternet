@@ -11,6 +11,11 @@ import {
   loadCSS,
   buildBlock,
 } from './aem.js';
+import { configureMedia } from './media.js';
+import { configureTemplate, decorateTemplateButtons } from './template.js';
+
+configureMedia({ imageHosts: ['scene7.com/is/image/'] });
+configureTemplate({ template: 'viasat' });
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -153,6 +158,7 @@ export function decorateMain(main) {
   decorateSections(main);
   decorateBlocks(main);
   decorateButtons(main);
+  decorateTemplateButtons(main);
 }
 
 /**
