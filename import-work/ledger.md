@@ -33,3 +33,9 @@ Offsets: 18/18 sections at the source's page position. Lint: `npm run lint` clea
 - Not covered: mobile (hero text overflows at 375px), hover/open states, FAQ open state, carousel
   arrow behaviour, nav scroll behaviour, sticky header timeline.
 - Footer text boxes are about 6% wider on the source than in the rebuild at identical font settings; cause not found.
+
+## Branch preview check
+After `publish.js --yes --ref viasat-home`, nav and footer matched. For home, publish.js printed
+"blocks DIFFER (8 authored vs 0 served)" although the served `index.plain.html` contains all blocks.
+Re-gating against https://viasat-home--viasatinternet--adobedrago.aem.page/ (gate/home-branch.json)
+gave the same numbers as the local build in all 18 checks.
