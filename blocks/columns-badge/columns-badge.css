@@ -1,0 +1,70 @@
+/* columns-badge: award badge beside a heading (source "row" component, bm-box p-200) */
+.columns-badge {
+  padding: 32px;
+  text-align: center;
+}
+
+/* source components stack 48px apart; no extra space at the section edges */
+:not(:first-child) > .columns-badge {
+  margin-top: 48px;
+}
+
+:not(:last-child) > .columns-badge {
+  margin-bottom: 48px;
+}
+
+:first-child > .columns-badge {
+  padding-top: 0;
+}
+
+:last-child > .columns-badge {
+  padding-bottom: 0;
+}
+
+.columns-badge .columns-badge-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+/* mobile: badge at half width (col-6), heading full width below (col-12) */
+.columns-badge .columns-badge-img-col {
+  flex: 0 1 calc(50% - 8px);
+  max-width: 50%;
+  line-height: 0;
+}
+
+.columns-badge .columns-badge-img-col picture,
+.columns-badge .columns-badge-img-col img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.columns-badge .columns-badge-text-col {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.columns-badge .columns-badge-text-col > :first-child {
+  margin-top: 0;
+}
+
+.columns-badge .columns-badge-text-col > :last-child {
+  margin-bottom: 0;
+}
+
+/* desktop: badge col-2 beside heading col-6, centered as a group */
+@media (width >= 900px) {
+  .columns-badge .columns-badge-img-col {
+    flex: 0 1 calc(16.6667% - 13.33px);
+    max-width: 16.6667%;
+  }
+
+  .columns-badge .columns-badge-text-col {
+    flex: 0 1 calc(50% - 8px);
+    max-width: 50%;
+  }
+}

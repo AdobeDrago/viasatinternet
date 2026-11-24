@@ -1,0 +1,31 @@
+{
+  "variantName": "carousel-cards",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Slider of look-alike icon cards (title + text above an icon image), several visible at once",
+    "observed": [
+      "Source carousel of 5 cards: subheader title, short text, icon image",
+      "Carousel of 6 icon cards (title, text, 3D icon); source DOM repeats slides for looping"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per slide: [icon image | h3 title, paragraph]",
+    "pages": [
+      "home",
+      "plans"
+    ],
+    "sectionStyles": [
+      "centered",
+      "centered"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "\"Why people choose Viasat\" sliders on home (5 slides) and plans (6 slides).",
+  "reuseGuidance": "Author as \"Carousel Cards\". Author only the unique slides (the source repeats slides for looping); prev/next wrap around.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/",
+    "https://www.viasatinternet.com/satellite-internet/plans/"
+  ]
+}

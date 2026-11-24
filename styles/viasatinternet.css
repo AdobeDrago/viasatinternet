@@ -1,0 +1,344 @@
+/*
+ * Viasat Internet site theme.
+ * Loaded before first paint for pages with Metadata "Template: viasatinternet"
+ * (body.viasatinternet, see loadEager in scripts/scripts.js). Every rule is scoped to
+ * body.viasatinternet so other sites in this project are unaffected.
+ * Tokens live in styles/brand.css (also scoped to body.viasatinternet).
+ *
+ * Selectors use :where(body.viasatinternet) so each rule keeps the specificity of the
+ * boilerplate rule it overrides (it wins by load order) and block CSS can still refine it.
+ */
+/* stylelint-disable no-descending-specificity -- variant states are grouped per variant; disabled must come last */
+
+/* fallback fonts (size-adjust measured against Arial) to limit layout shift before fonts.css */
+@font-face {
+  font-family: viasat-heading-fallback;
+  font-weight: 700;
+  size-adjust: 79.88%;
+  src: local('Arial Bold'), local('Arial-BoldMT'), local('Arial');
+}
+
+@font-face {
+  font-family: viasat-body-fallback;
+  size-adjust: 81.5%;
+  src: local('Arial');
+}
+
+/* ------------------------------------------------------------------
+ * Contextual colors: sections and heroes redefine these, everything
+ * below reads them.
+ * ------------------------------------------------------------------ */
+body.viasatinternet {
+  --viasat-btn-primary-bg: var(--viasat-ink);
+  --viasat-btn-primary-fg: var(--viasat-white);
+  --viasat-btn-primary-bg-hover: var(--viasat-gray-900);
+  --viasat-btn-secondary-fg: var(--viasat-ink);
+  --viasat-btn-secondary-ring: var(--viasat-ink);
+  --viasat-btn-secondary-bg-hover: var(--viasat-gray-100);
+  --viasat-icon-filter: none;
+
+  line-height: var(--body-line-height);
+}
+
+/* dark navy, orange band and photo heroes: light text, links and buttons */
+:where(body.viasatinternet) main .section.dark,
+:where(body.viasatinternet) main .section.orange,
+:where(body.viasatinternet) main :is(.hero-lookup, .hero-photo, .hero-promo) {
+  --text-color: var(--viasat-on-dark-text);
+  --heading-color: var(--viasat-on-dark-text);
+  --link-color: var(--viasat-on-dark-link);
+  --link-hover-color: var(--viasat-on-dark-link);
+  --viasat-btn-primary-bg: var(--viasat-white);
+  --viasat-btn-primary-fg: var(--viasat-ink-heading);
+  --viasat-btn-primary-bg-hover: var(--viasat-gray-100);
+  --viasat-btn-secondary-fg: var(--viasat-white);
+  --viasat-btn-secondary-ring: var(--viasat-white);
+  --viasat-btn-secondary-bg-hover: rgb(255 255 255 / 10%);
+  --viasat-icon-filter: brightness(0) invert(1);
+
+  color: var(--text-color);
+}
+
+/* on orange and on photos the teal-light link has too little contrast: use white */
+:where(body.viasatinternet) main .section.orange,
+:where(body.viasatinternet) main :is(.hero-lookup, .hero-photo, .hero-promo) {
+  --link-color: var(--viasat-on-dark-text);
+  --link-hover-color: var(--viasat-on-dark-text);
+}
+
+/* hero readability baseline on bright photo areas (block design pass may refine) */
+:where(body.viasatinternet) main :is(.hero-lookup, .hero-photo, .hero-promo) :is(h1, h2, h3, p, li) {
+  text-shadow: 0 1px 4px rgb(0 0 0 / 35%);
+}
+
+/* ------------------------------------------------------------------
+ * Typography
+ * ------------------------------------------------------------------ */
+:where(body.viasatinternet) main {
+  color: var(--text-color);
+}
+
+:where(body.viasatinternet main) h1,
+:where(body.viasatinternet main) h2,
+:where(body.viasatinternet main) h3,
+:where(body.viasatinternet main) h4,
+:where(body.viasatinternet main) h5,
+:where(body.viasatinternet main) h6 {
+  color: var(--heading-color);
+  font-family: var(--heading-font-family);
+  font-weight: var(--heading-font-weight);
+}
+
+:where(body.viasatinternet main) h1 { line-height: var(--heading-line-height-xxl); }
+:where(body.viasatinternet main) h2 { line-height: var(--heading-line-height-xl); }
+:where(body.viasatinternet main) h3 { line-height: var(--heading-line-height-l); }
+:where(body.viasatinternet main) h4 { line-height: var(--heading-line-height-m); }
+:where(body.viasatinternet main) h5 { line-height: var(--heading-line-height-s); }
+:where(body.viasatinternet main) h6 { line-height: var(--heading-line-height-xs); }
+
+/* default content: source components stack with 16px gaps, no heading margins */
+:where(body.viasatinternet) main .default-content-wrapper > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+:where(body.viasatinternet) main .default-content-wrapper > * + * {
+  margin-top: 16px;
+}
+
+:where(body.viasatinternet) main .default-content-wrapper > * + :is(h2, h3, h4) {
+  margin-top: 32px;
+}
+
+:where(body.viasatinternet) main :is(ul, ol) {
+  padding-left: 40px;
+}
+
+:where(body.viasatinternet) main li + li {
+  margin-top: 4px;
+}
+
+/* ------------------------------------------------------------------
+ * Links (source: underlined, same color on hover; focus ring #0095e0)
+ * ------------------------------------------------------------------ */
+:where(body.viasatinternet) main a:any-link {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+:where(body.viasatinternet) main a:hover {
+  color: var(--link-hover-color);
+  text-decoration: underline;
+}
+
+:where(body.viasatinternet) main a:focus-visible {
+  outline: 2px solid var(--viasat-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* ------------------------------------------------------------------
+ * Buttons
+ * EDS reset first (plain a.button falls back to a link), then the
+ * source bm-button variants: accent (orange gradient), primary (neutral
+ * filled, inverts on dark), secondary (neutral outline).
+ * ------------------------------------------------------------------ */
+:where(body.viasatinternet) main p.button-wrapper {
+  margin: 16px 0;
+}
+
+:where(body.viasatinternet) main a.button:any-link {
+  margin: 0;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  background: none;
+  color: var(--link-color);
+  font-size: inherit;
+  font-weight: inherit;
+  text-decoration: underline;
+  white-space: normal;
+}
+
+:where(body.viasatinternet) main a.button:is(.primary, .secondary, .accent),
+:where(body.viasatinternet) main button.button {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  max-width: 100%;
+  min-height: var(--viasat-button-height);
+  margin: 0;
+  border: 0;
+  border-radius: var(--viasat-button-radius);
+  padding: var(--viasat-button-padding);
+  font-family: var(--heading-font-family);
+  font-size: var(--viasat-button-font-size);
+  font-weight: 700;
+  line-height: var(--viasat-button-line-height);
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  cursor: pointer;
+}
+
+/* trailing arrow (source bm-icon-ArrowForward, 20px, 4px gap) */
+:where(body.viasatinternet) main a.button:is(.primary, .accent)::after {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+:where(body.viasatinternet) main a.button:is(.primary, .secondary, .accent):focus-visible,
+:where(body.viasatinternet) main button.button:focus-visible {
+  outline: 2px solid var(--viasat-focus);
+  outline-offset: 2px;
+}
+
+/* accent: orange gradient (Check availability, Explore plans) */
+:where(body.viasatinternet) main a.button.accent,
+:where(body.viasatinternet) main button.button.accent,
+:where(body.viasatinternet) main .address-lookup-form button.button {
+  border: 0;
+  background-color: transparent;
+  background-image: var(--viasat-cta-gradient);
+  color: var(--viasat-white);
+}
+
+:where(body.viasatinternet) main a.button.accent:hover,
+:where(body.viasatinternet) main button.button.accent:hover,
+:where(body.viasatinternet) main .address-lookup-form button.button:hover {
+  background-color: transparent;
+  background-image: var(--viasat-cta-gradient-hover);
+  color: var(--viasat-white);
+}
+
+:where(body.viasatinternet) main a.button.accent:is(:focus-visible, :active),
+:where(body.viasatinternet) main button.button.accent:is(:focus-visible, :active),
+:where(body.viasatinternet) main .address-lookup-form button.button:is(:focus-visible, :active) {
+  background-color: transparent;
+  background-image: var(--viasat-cta-gradient-pressed);
+  color: var(--viasat-white);
+}
+
+/* primary: neutral filled (dark on light surfaces, white on dark/orange/photo) */
+:where(body.viasatinternet) main a.button.primary,
+:where(body.viasatinternet) main button.button.primary {
+  border: 0;
+  background-color: var(--viasat-btn-primary-bg);
+  color: var(--viasat-btn-primary-fg);
+}
+
+:where(body.viasatinternet) main a.button.primary:is(:hover, :focus-visible, :active),
+:where(body.viasatinternet) main button.button.primary:is(:hover, :focus-visible, :active) {
+  border: 0;
+  background-color: var(--viasat-btn-primary-bg-hover);
+  color: var(--viasat-btn-primary-fg);
+}
+
+/* secondary: neutral outline */
+:where(body.viasatinternet) main a.button.secondary,
+:where(body.viasatinternet) main button.button.secondary {
+  border: 0;
+  background-color: transparent;
+  box-shadow: inset 0 0 0 2px var(--viasat-btn-secondary-ring);
+  color: var(--viasat-btn-secondary-fg);
+}
+
+:where(body.viasatinternet) main a.button.secondary:is(:hover, :focus-visible, :active),
+:where(body.viasatinternet) main button.button.secondary:is(:hover, :focus-visible, :active) {
+  border: 0;
+  background-color: var(--viasat-btn-secondary-bg-hover);
+  color: var(--viasat-btn-secondary-fg);
+}
+
+/* disabled (source opacity-disabled) */
+:where(body.viasatinternet) main a.button[aria-disabled='true'],
+:where(body.viasatinternet) main button.button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ------------------------------------------------------------------
+ * Layout and sections
+ * ------------------------------------------------------------------ */
+:where(body.viasatinternet) main > .section {
+  margin: 0;
+  padding: var(--viasat-section-padding) 0;
+}
+
+:where(body.viasatinternet) main > .section > div {
+  max-width: var(--viasat-content-max-width);
+  padding: 0 var(--viasat-gutter);
+}
+
+/* full-bleed heroes: no section padding next to them */
+:where(body.viasatinternet) main > .section:has(> :is(.hero-lookup-wrapper, .hero-photo-wrapper):first-child) {
+  padding-top: 0;
+}
+
+:where(body.viasatinternet) main > .section:has(> :is(.hero-lookup-wrapper, .hero-photo-wrapper):last-child) {
+  padding-bottom: 0;
+}
+
+/* inset promo banner: the source band keeps a 24px (space-150) edge above and below */
+:where(body.viasatinternet) main > .section:has(> .hero-promo-wrapper:first-child) {
+  padding-top: 24px;
+}
+
+:where(body.viasatinternet) main > .section:has(> .hero-promo-wrapper:last-child) {
+  padding-bottom: 24px;
+}
+
+:where(body.viasatinternet) main > .section.cream {
+  background-color: var(--viasat-surface-cream);
+}
+
+:where(body.viasatinternet) main > .section.light {
+  margin: 0;
+  padding: var(--viasat-section-padding) 0;
+  background-color: var(--viasat-surface-light);
+}
+
+:where(body.viasatinternet) main > .section.dark {
+  background-color: var(--viasat-surface-dark);
+}
+
+:where(body.viasatinternet) main > .section.orange {
+  background-color: var(--viasat-surface-orange);
+}
+
+:where(body.viasatinternet) main > .section.centered > .default-content-wrapper {
+  text-align: center;
+}
+
+/* ------------------------------------------------------------------
+ * Icons: /icons SVGs render as <img>, so currentColor cannot apply.
+ * Recolor with a filter on dark/orange surfaces and photo heroes.
+ * ------------------------------------------------------------------ */
+:where(body.viasatinternet) main .icon img {
+  filter: var(--viasat-icon-filter);
+}
+
+/* ------------------------------------------------------------------
+ * Inlined fragments (FAQ page topic fragments: a fragment's sections
+ * nest inside the host page's default content)
+ * ------------------------------------------------------------------ */
+:where(body.viasatinternet) main .default-content-wrapper > .section {
+  margin: 0;
+  padding: 0;
+}
+
+:where(body.viasatinternet) main .default-content-wrapper > .section + .section {
+  margin-top: 48px;
+}
+
+:where(body.viasatinternet) main .default-content-wrapper > .section h2 {
+  font-size: 24px;
+  line-height: 32px;
+}

@@ -10,12 +10,10 @@ import {
   loadSections,
   loadCSS,
   buildBlock,
+  readBlockConfig,
+  toCamelCase,
+  toClassName,
 } from './aem.js';
-import { configureMedia } from './media.js';
-import { configureTemplate, decorateTemplateButtons } from './template.js';
-
-configureMedia({ imageHosts: ['scene7.com/is/image/'] });
-configureTemplate({ template: 'viasat' });
 
 if (window.trustedTypes && window.trustedTypes.createPolicy) {
   const innerTT = window.trustedTypes.createPolicy('tt-inner', {
@@ -85,7 +83,9 @@ function buildWidgetAutoBlocks(main) {
 function buildAutoBlocks(main) {
   try {
     // auto load `*/fragments/*` references
-    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')].filter((f) => !f.closest('.fragment'));
+    // (accordion-faq resolves its own /fragments/faq/<topic>#<slug> reference rows)
+    const fragments = [...main.querySelectorAll('a[href*="/fragments/"]')]
+      .filter((f) => !f.closest('.fragment') && !f.closest('.accordion-faq'));
     if (fragments.length > 0) {
       // eslint-disable-next-line import/no-cycle
       import('../blocks/fragment/fragment.js').then(({ loadFragment }) => {
@@ -148,6 +148,28 @@ function decorateButtons(main) {
 }
 
 /**
+ * Applies Section Metadata tables to their sections: "style" becomes section classes,
+ * any other setting becomes a data attribute. Runs before blocks are decorated so the
+ * table is never loaded as a block.
+ * @param {Element} main The main element
+ */
+function decorateSectionMetadata(main) {
+  main.querySelectorAll(':scope > .section > div > .section-metadata').forEach((sectionMeta) => {
+    const section = sectionMeta.closest('.section');
+    const meta = readBlockConfig(sectionMeta);
+    Object.keys(meta).forEach((key) => {
+      if (key === 'style') {
+        String(meta.style).split(',').map((s) => toClassName(s.trim())).filter(Boolean)
+          .forEach((style) => section.classList.add(style));
+      } else {
+        section.dataset[toCamelCase(key)] = meta[key];
+      }
+    });
+    sectionMeta.parentElement.remove();
+  });
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -156,9 +178,9 @@ export function decorateMain(main) {
   decorateIcons(main);
   buildAutoBlocks(main);
   decorateSections(main);
+  decorateSectionMetadata(main);
   decorateBlocks(main);
   decorateButtons(main);
-  decorateTemplateButtons(main);
 }
 
 /**
@@ -168,6 +190,13 @@ export function decorateMain(main) {
 async function loadEager(doc) {
   document.documentElement.lang = 'en';
   decorateTemplateAndTheme();
+  // site themes that only apply to some pages (Metadata "Template"), loaded before first paint
+  if (document.body.classList.contains('studio-0101')) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/studio-0101.css`);
+  }
+  if (document.body.classList.contains('viasatinternet')) {
+    await loadCSS(`${window.hlx.codeBasePath}/styles/viasatinternet.css`);
+  }
   const main = doc.querySelector('main');
   if (main) {
     decorateMain(main);

@@ -1,19 +1,23 @@
-/**
- * Accordion: each row is a question cell and an answer cell.
- * @param {Element} block accordion block
+/*
+ * Accordion Block
+ * Recreate an accordion
+ * https://www.hlx.live/developer/block-collection/accordion
  */
+
 export default function decorate(block) {
   [...block.children].forEach((row) => {
-    const [label, body] = [...row.children];
-    const details = document.createElement('details');
-    details.className = 'accordion-item';
+    // decorate accordion item label
+    const label = row.children[0];
     const summary = document.createElement('summary');
     summary.className = 'accordion-item-label';
     summary.append(...label.childNodes);
-    const content = document.createElement('div');
-    content.className = 'accordion-item-body';
-    if (body) content.append(...body.childNodes);
-    details.append(summary, content);
+    // decorate accordion item body
+    const body = row.children[1];
+    body.className = 'accordion-item-body';
+    // decorate accordion item
+    const details = document.createElement('details');
+    details.className = 'accordion-item';
+    details.append(summary, body);
     row.replaceWith(details);
   });
 }

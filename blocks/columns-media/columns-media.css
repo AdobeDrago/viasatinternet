@@ -1,0 +1,188 @@
+/* Columns (media): white rounded card, image cell + text cell (source bm-box p-200 gap-200 radius-lg) */
+.columns-media .columns-media-row {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: var(--viasat-surface-light, #fff);
+  color: var(--text-color);
+  text-align: start;
+}
+
+.columns-media .columns-media-row + .columns-media-row {
+  margin-top: 48px;
+}
+
+/* image: always on top on mobile (source flip-mobile-order) */
+.columns-media .columns-media-img-col {
+  order: -1;
+  line-height: 0;
+}
+
+.columns-media .columns-media-img-col picture {
+  display: block;
+}
+
+.columns-media .columns-media-img-col img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+/* text: source stacks title, text, list, actions and notes 32px apart, centered vertically */
+.columns-media .columns-media-text-col {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-width: 0;
+}
+
+.columns-media .columns-media-text-col > * {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.columns-media .columns-media-text-col > * + * {
+  margin-top: 32px;
+}
+
+/* paragraphs of one text group (body copy, notes) sit 16px apart */
+.columns-media .columns-media-text-col > p + p {
+  margin-top: 16px;
+}
+
+/* eyebrow above the heading ("STEP 1"; source label-md) */
+.columns-media .columns-media-text-col p.columns-media-eyebrow {
+  font-size: var(--body-font-size-m);
+  font-weight: 600;
+  line-height: 24px;
+}
+
+/* subheading under the heading (source heading-md) */
+.columns-media .columns-media-text-col p.columns-media-lead {
+  font-family: var(--heading-font-family);
+  font-size: var(--viasat-lead-font-size);
+  font-weight: 700;
+  line-height: var(--viasat-lead-line-height);
+}
+
+/* footnotes after the CTA (source body-xs 12px inside a 24px line box) */
+.columns-media .columns-media-text-col p.columns-media-note {
+  font-size: var(--body-font-size-xs);
+  line-height: 24px;
+}
+
+/* check-mark list (source label-lg rows: "✓  text", 16px apart) */
+.columns-media .columns-media-text-col ul {
+  padding: 0;
+  list-style: none;
+}
+
+.columns-media .columns-media-text-col li {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.columns-media .columns-media-text-col li + li {
+  margin-top: 16px;
+}
+
+.columns-media .columns-media-text-col li::before {
+  content: '\2713\00a0 ';
+}
+
+/* actions: stacked 16px apart; a phone link sits beside the CTA as a bare link */
+.columns-media .columns-media-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.columns-media .columns-media-actions:has(a[href^='tel:']) {
+  flex-flow: row wrap;
+  align-items: center;
+}
+
+.columns-media .columns-media-actions p.button-wrapper {
+  margin: 0;
+}
+
+/* source lg buttons in the CTA + phone row */
+.columns-media .columns-media-actions:has(a[href^='tel:']) a.button.accent {
+  min-height: 56px;
+  padding: 16px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.columns-media .columns-media-actions:has(a[href^='tel:']) a.button.accent::after {
+  width: 24px;
+  height: 24px;
+}
+
+.columns-media .columns-media-actions a.button.primary[href^='tel:'],
+.columns-media .columns-media-actions a.button.primary[href^='tel:']:is(:hover, :focus-visible, :active) {
+  gap: 8px;
+  min-height: 0;
+  padding: 0;
+  background-color: transparent;
+  color: var(--viasat-ink);
+  font-size: 18px;
+  line-height: 24px;
+}
+
+.columns-media .columns-media-actions a.button.primary[href^='tel:']::after {
+  width: 24px;
+  height: 24px;
+}
+
+@media (width >= 600px) {
+  .columns-media .columns-media-img-col img {
+    aspect-ratio: 9 / 4;
+  }
+}
+
+@media (width >= 900px) {
+  .columns-media .columns-media-row {
+    flex-direction: row;
+    align-items: stretch;
+  }
+
+  .columns-media .columns-media-row > div {
+    flex: 1 1 0;
+    order: 0;
+  }
+
+  /* desktop image fills the cell height set by the text, never shorter than about 2:1 */
+  .columns-media .columns-media-img-col {
+    position: relative;
+  }
+
+  .columns-media .columns-media-img-col::before {
+    content: '';
+    display: block;
+    padding-top: 52%;
+  }
+
+  .columns-media .columns-media-img-col picture {
+    position: absolute;
+    inset: 0;
+  }
+
+  .columns-media .columns-media-img-col img {
+    height: 100%;
+    aspect-ratio: auto;
+  }
+}
+
+/* joined panel: icon tiles right below continue this card (add-ons), so square the seam corners */
+.section > div:has(> .columns-media):has(+ div > .cards-icon) .columns-media .columns-media-row:last-child {
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}

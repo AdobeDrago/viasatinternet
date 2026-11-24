@@ -1,0 +1,25 @@
+{
+  "variantName": "hero-promo",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Rounded promo banner with background image and two text groups",
+    "observed": [
+      "Source hero: background image, two text boxes (offer heading + See plans CTA; savings heading + disclaimer)"
+    ]
+  },
+  "contentPattern": {
+    "structure": "row 1: background image; row 2 (one cell): heading + CTA link (left group), second heading + disclaimer paragraph (right group); the split is made at the second heading",
+    "pages": [
+      "home"
+    ],
+    "sectionStyles": []
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Homepage promo banner (\"Order Viasat Essentials or Unleashed\" / \"Save $360 ...\").",
+  "reuseGuidance": "Author as \"Hero Promo\". Keep both groups in one cell; the second heading starts the right-hand group.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/"
+  ]
+}

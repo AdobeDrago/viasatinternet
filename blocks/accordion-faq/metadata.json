@@ -1,0 +1,45 @@
+{
+  "variantName": "accordion-faq",
+  "baseBlock": "accordion",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Single-expand FAQ accordion with question slug ids, reference rows into topic fragments and merged FAQPage JSON-LD",
+    "observed": [
+      "Source accordion with 3 Q&As (questions in heading attributes, answers rich text with links/lists)",
+      "Accordion of 7 Q&As",
+      "Accordion of 6 Q&As (How do I add EasyCare to my plan?, What devices can I protect?, How much does EasyCare cost?, How do I file a claim?, My device is broken now..., Does EasyCare Premium cover ADH failures?)",
+      "Accordion group 'About satellite internet from Viasat' (6 Q&As)",
+      "Accordion group 'Satellite internet service plans' (4 Q&As)",
+      "Accordion group 'General information about Viasat Internet' (4 Q&As)",
+      "Accordion group 'Welcome new Viasat customers' (1 Q&As)",
+      "Accordion group 'All about internet data' (5 Q&As)",
+      "Accordion group 'Viasat Internet add-ons' (1 Q&As)",
+      "Accordion group 'Satellite installation and equipment' (6 Q&As)",
+      "Accordion group 'Network security' (3 Q&As)"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per Q&A: [question (plain text) | answer (rich text)]; or a reference row with ONE cell holding only a link to /viasatinternet/fragments/faq/<topic>#<question-slug>",
+    "pages": [
+      "home",
+      "plans",
+      "easycare",
+      "faq"
+    ],
+    "sectionStyles": [
+      "dark, centered",
+      "dark, centered",
+      "dark, centered"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "FAQ sections on home, plans, easycare and the 8 topic fragments /viasatinternet/fragments/faq/<topic> used by the FAQ page. Each item id is the question slug (lowercase, accents stripped, non-alphanumerics collapsed to \"-\", e.g. \"how-does-satellite-internet-work\"); #<slug> in the URL opens and scrolls to it. Reference rows are replaced by that Q&A fetched from <path>.plain.html (cached per path); unresolved references are dropped with a console warning. Every decorated Q&A (incl. fragments and references) feeds one <script type=\"application/ld+json\" id=\"faq-jsonld\"> FAQPage via scripts/structured-data.js upsertFaqJsonLd().",
+  "reuseGuidance": "Author as \"Accordion Faq\". Use reference rows for Q&As whose answer matches a master answer; keep page-specific Q&As inline. Slugs must be computed exactly like questionSlug() in accordion-faq.js. Dark vs white color schemes come from section styles.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/",
+    "https://www.viasatinternet.com/satellite-internet/plans/",
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/",
+    "https://www.viasatinternet.com/satellite-internet/faq/"
+  ]
+}

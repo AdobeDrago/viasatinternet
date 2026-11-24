@@ -1,0 +1,112 @@
+/* Add-on cards: values measured from viasatinternet.com/satellite-internet/plans (bm card, surface-00-alt) */
+.cards-addons > ul {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-addons > ul > li {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin: 0;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: var(--viasat-surface-light);
+  box-shadow: 0 6px 16px 2px rgb(0 0 0 / 12%);
+  color: var(--viasat-ink);
+  text-align: left;
+}
+
+.cards-addons .cards-addons-card-image {
+  line-height: 0;
+}
+
+.cards-addons .cards-addons-card-image picture,
+.cards-addons .cards-addons-card-image img {
+  display: block;
+  width: 100%;
+}
+
+.cards-addons .cards-addons-card-image img {
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.cards-addons .cards-addons-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0 32px 32px;
+}
+
+.cards-addons .cards-addons-card-body > * {
+  margin: 0;
+}
+
+.cards-addons .cards-addons-card-body h3 {
+  color: var(--viasat-ink);
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.cards-addons .cards-addons-card-body p {
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+/* 32px between the description and the divider (12px gap + 20px) */
+.cards-addons .cards-addons-card-body > :has(+ .cards-addons-offer) {
+  margin-bottom: 20px;
+}
+
+/* divider + icon offer, pinned to the card bottom */
+.cards-addons .cards-addons-card-body > .cards-addons-offer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 32px;
+  border-top: 1px solid var(--viasat-gray-200);
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.cards-addons .cards-addons-offer .icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.cards-addons .cards-addons-offer .icon img {
+  width: 100%;
+  height: 100%;
+}
+
+/* source tag icon is a solid green (#24a148) tag; the <img> cannot take currentColor and
+   /icons/tag.svg is the outline glyph, so mask the span with the filled tag shape */
+.cards-addons .cards-addons-offer .icon-tag {
+  background-color: #24a148;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 -960 960 960'%3E%3Cpath fill-rule='evenodd' d='M856-390 570-104q-12 12-27 18t-30 6q-15 0-30-6t-27-18L103-457q-11-11-17-25.5T80-513v-287q0-33 23.5-56.5T160-880h287q16 0 31 6.5t26 17.5l352 353q12 12 17.5 27t5.5 30q0 15-5.5 29.5T856-390ZM260-640q25 0 42.5-17.5T320-700q0-25-17.5-42.5T260-760q-25 0-42.5 17.5T200-700q0 25 17.5 42.5T260-640Z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.cards-addons .cards-addons-offer .icon-tag img {
+  visibility: hidden;
+}
+
+@media (width >= 600px) {
+  .cards-addons > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .cards-addons > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}

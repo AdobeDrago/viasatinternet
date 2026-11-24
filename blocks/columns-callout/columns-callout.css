@@ -1,0 +1,123 @@
+/*
+ * Columns Callout: rounded dark bar (source bm-box backgroundcolor="expressive-stronger",
+ * px/py 200, gap 150, radius lg), message left, action right.
+ * Option "neutral": the navy surface-00 bar (plans page).
+ * The bar is always dark, so it sets the dark-surface colors itself, whatever the section style.
+ */
+.columns-callout {
+  --text-color: var(--viasat-on-dark-text);
+  --link-color: var(--viasat-on-dark-text);
+  --link-hover-color: var(--viasat-on-dark-text);
+  --viasat-btn-primary-bg: var(--viasat-white);
+  --viasat-btn-primary-fg: var(--viasat-ink-heading);
+  --viasat-btn-primary-bg-hover: var(--viasat-gray-100);
+  --viasat-btn-secondary-fg: var(--viasat-white);
+  --viasat-btn-secondary-ring: var(--viasat-white);
+  --viasat-btn-secondary-bg-hover: rgb(255 255 255 / 10%);
+  --viasat-icon-filter: brightness(0) invert(1);
+  --columns-callout-bg: #00414d;
+}
+
+.columns-callout.neutral {
+  --columns-callout-bg: var(--viasat-ink);
+}
+
+.columns-callout .columns-callout-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+  padding: 32px;
+  border-radius: 16px;
+  background-color: var(--columns-callout-bg);
+  color: var(--text-color);
+  text-align: left;
+}
+
+.columns-callout .columns-callout-row + .columns-callout-row {
+  margin-top: 16px;
+}
+
+.columns-callout .columns-callout-text-col {
+  flex: 1 1 100%;
+  min-width: 0;
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+  text-wrap: balance;
+}
+
+.columns-callout .columns-callout-row p {
+  margin: 0;
+}
+
+.columns-callout .columns-callout-text-col strong {
+  margin-right: 0.5em;
+  color: var(--viasat-warm-400);
+}
+
+.columns-callout .columns-callout-text-col a:any-link:not(.button) {
+  color: var(--link-color);
+  text-decoration: underline;
+}
+
+.columns-callout .columns-callout-action-col {
+  text-align: right;
+}
+
+.columns-callout .columns-callout-action-col strong {
+  margin-right: 0;
+}
+
+main .columns-callout .columns-callout-action-col p.button-wrapper {
+  margin: 0;
+}
+
+/* phone CTA: source bm-button kind="bare" (no fill, icon before, 8px gap) */
+main .columns-callout a.button[href^='tel:']:any-link {
+  min-height: 0;
+  gap: 8px;
+  padding: 0;
+  background: none;
+  color: var(--viasat-on-dark-text);
+  font-size: var(--viasat-button-font-size);
+  line-height: var(--viasat-button-line-height);
+  text-decoration: none;
+}
+
+main .columns-callout a.button[href^='tel:']:hover {
+  text-decoration: underline;
+}
+
+main .columns-callout a.button[href^='tel:']::after {
+  content: none;
+}
+
+.columns-callout a.button .icon {
+  display: block;
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+.columns-callout a.button .icon img {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media (width >= 900px) {
+  .columns-callout .columns-callout-row {
+    flex-wrap: nowrap;
+  }
+
+  /* source col-lg-9 / col-lg (12-column grid, 24px gap) */
+  .columns-callout .columns-callout-text-col {
+    flex: 0 1 calc(75% - 6px);
+  }
+
+  .columns-callout .columns-callout-action-col {
+    flex: 1 1 0;
+  }
+}

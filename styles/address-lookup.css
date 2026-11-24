@@ -1,0 +1,73 @@
+/* Shared address lookup form (scripts/address-lookup.js), used by address-lookup and hero-lookup */
+.address-lookup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 560px;
+}
+
+.address-lookup-form .address-lookup-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  flex: 1;
+}
+
+.address-lookup-form .address-lookup-field {
+  position: relative;
+  flex: 2 1 200px;
+  min-width: 0;
+}
+
+.address-lookup-form .address-lookup-field-unit {
+  flex: 1 1 120px;
+}
+
+.address-lookup-form .address-lookup-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.address-lookup-form input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  padding: 0 16px;
+  font: inherit;
+}
+
+.address-lookup-form .address-lookup-action .button {
+  width: 100%;
+  margin: 0;
+}
+
+.address-lookup-form .address-lookup-message {
+  flex-basis: 100%;
+  margin: 0;
+}
+
+.address-lookup-form .address-lookup-message[hidden] {
+  display: none;
+}
+
+@media (width >= 600px) {
+  .address-lookup-form {
+    flex-flow: row wrap;
+    align-items: stretch;
+  }
+
+  .address-lookup-form .address-lookup-fields {
+    flex: 1 1 300px;
+    flex-direction: row;
+  }
+
+  .address-lookup-form .address-lookup-action .button {
+    width: auto;
+    height: 100%;
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "variantName": "hero-photo",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Full-bleed photo banner with centered heading, optional text and one or more CTAs (no address form)",
+    "observed": [
+      "Source hero: background photo, h2 'Satellite internet keeps you connected', paragraph, CTA 'Learn more about satellite internet'",
+      "Source hero: photo, h2 'Connecting you with more of what you love', CTA 'Check availability'",
+      "Source hero (thin): photo (video call on phone), centered h2 'Ready to choose an EasyCare option?', CTAs 'Pick your internet plan & add EasyCare' and 'Already a customer? Add EasyCare'"
+    ]
+  },
+  "contentPattern": {
+    "structure": "row 1: background image; row 2: heading, optional paragraph, one or more CTA links (grouped into .hero-photo-actions)",
+    "pages": [
+      "home",
+      "plans",
+      "easycare"
+    ],
+    "sectionStyles": []
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Mid-page photo banners on home, plans, easycare.",
+  "reuseGuidance": "Author as \"Hero Photo\". A \"Check availability\" link here stays a button; use hero-lookup for an address field.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/",
+    "https://www.viasatinternet.com/satellite-internet/plans/",
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/"
+  ]
+}

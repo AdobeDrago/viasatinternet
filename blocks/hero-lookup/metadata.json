@@ -1,0 +1,36 @@
+{
+  "variantName": "hero-lookup",
+  "baseBlock": "hero",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Full-bleed photo hero with h1, subheading, address lookup form (from the \"Check availability\" link) and disclaimer",
+    "observed": [
+      "Source hero: background photo, h1 'Fast, reliable satellite internet', subheading, address-lookup form (destination https://buy.viasat.com/en-US/r/), disclaimer text",
+      "Source hero + address-lookup: photo, h1 'Fast, reliable satellite internet plans for wherever you live', subheading, address field + Check availability",
+      "Source hero: photo (man on couch with laptop), h1 'Enhanced support with EasyCare', subheading, 'SAVE ON YOUR FIRST 3 MONTHS!*', two CTAs ('Not a customer? Shop internet plans' -> buy.viasat.com, 'Already a customer? Add EasyCare' -> my.viasat.com), disclaimer"
+    ]
+  },
+  "contentPattern": {
+    "structure": "row 1: background image; row 2: h1, subheading paragraph, link \"Check availability\" -> https://buy.viasat.com/en-US/r/ (becomes the address form), other CTA links (stay buttons), disclaimer paragraph(s) after the last form/button",
+    "pages": [
+      "home",
+      "plans",
+      "easycare"
+    ],
+    "sectionStyles": []
+  },
+  "options": [
+    {
+      "class": "left",
+      "label": "Left-aligned content"
+    }
+  ],
+  "memberVariantIds": [],
+  "usage": "Page-top hero on home, plans, easycare. Only a link whose text is \"Check availability\" and that points at buy.viasat.com/en-US/r/ becomes the address form (shared scripts/address-lookup.js); every other link stays a button. Paragraphs after the last form/button get .hero-lookup-disclaimer. Use the \"left\" option for the left-column layout (easycare hero).",
+  "reuseGuidance": "Author the block name as \"Hero Lookup\" (class hero-lookup). \"Hero (lookup)\" would load the base hero with a \"lookup\" option instead.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/",
+    "https://www.viasatinternet.com/satellite-internet/plans/",
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/"
+  ]
+}

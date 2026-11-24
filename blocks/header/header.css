@@ -1,209 +1,917 @@
-/* stylelint-disable no-descending-specificity */
-header .header {
+/* header and nav layout */
+header .nav-wrapper {
+  background-color: var(--background-color);
+  width: 100%;
+  z-index: 2;
   position: fixed;
-  z-index: 100;
-  top: 0;
-  right: 0;
-  left: 0;
 }
 
-header .header-bar {
+header nav {
   box-sizing: border-box;
-  max-width: 1200px;
-  margin: 0 auto;
+  display: grid;
+  grid-template:
+    'hamburger brand tools' var(--nav-height)
+    'sections sections sections' 1fr / auto 1fr auto;
+  align-items: center;
+  gap: 0 24px;
+  margin: auto;
+  max-width: 1248px;
+  height: var(--nav-height);
   padding: 0 24px;
+  font-family: var(--body-font-family);
 }
 
-header .header-util {
-  display: none;
-  height: 44px;
-  background-color: var(--dark-color);
+header nav[aria-expanded='true'] {
+  grid-template:
+    'hamburger brand' var(--nav-height)
+    'sections sections' 1fr
+    'tools tools' var(--nav-height) / auto 1fr;
+  overflow-y: auto;
+  min-height: 100dvh;
 }
 
-header .header-util .header-bar {
+@media (width >= 900px) {
+  header .nav-wrapper {
+    position: relative;
+  }
+
+  header nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 0 32px;
+    max-width: 1264px;
+    padding: 0 32px;
+  }
+}
+
+header nav p {
+  margin: 0;
+  line-height: 1;
+}
+
+header nav a:any-link {
+  color: currentcolor;
+}
+
+/* hamburger */
+header nav .nav-hamburger {
+  grid-area: hamburger;
+  height: 22px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  height: 100%;
 }
 
-header .header-util-links {
-  display: contents;
-}
-
-header .nav-util,
-header .nav-util-end {
-  font-family: var(--body-font-family);
-  font-size: 14px;
-  font-weight: 600;
-  line-height: 20px;
-}
-
-header .nav-util ul {
-  display: flex;
-  gap: 32px;
+header nav .nav-hamburger button {
+  height: 22px;
   margin: 0;
+  border: 0;
+  border-radius: 0;
   padding: 0;
-  list-style: none;
+  background-color: var(--background-color);
+  color: inherit;
+  overflow: initial;
+  text-overflow: initial;
+  white-space: initial;
 }
 
-header .nav-util a:any-link,
-header .nav-util-end a:any-link {
-  color: #8697a5;
+header nav .nav-hamburger-icon,
+header nav .nav-hamburger-icon::before,
+header nav .nav-hamburger-icon::after {
+  box-sizing: border-box;
+  display: block;
+  position: relative;
+  width: 20px;
+}
+
+header nav .nav-hamburger-icon::before,
+header nav .nav-hamburger-icon::after {
+  content: '';
+  position: absolute;
+  background: currentcolor;
+}
+
+header nav[aria-expanded='false'] .nav-hamburger-icon,
+header nav[aria-expanded='false'] .nav-hamburger-icon::before,
+header nav[aria-expanded='false'] .nav-hamburger-icon::after {
+  height: 2px;
+  border-radius: 2px;
+  background: currentcolor;
+}
+
+header nav[aria-expanded='false'] .nav-hamburger-icon::before {
+  top: -6px;
+}
+
+header nav[aria-expanded='false'] .nav-hamburger-icon::after {
+  top: 6px;
+}
+
+header nav[aria-expanded='true'] .nav-hamburger-icon {
+  height: 22px;
+}
+
+header nav[aria-expanded='true'] .nav-hamburger-icon::before,
+header nav[aria-expanded='true'] .nav-hamburger-icon::after {
+  top: 3px;
+  left: 1px;
+  transform: rotate(45deg);
+  transform-origin: 2px 1px;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+}
+
+header nav[aria-expanded='true'] .nav-hamburger-icon::after {
+  top: unset;
+  bottom: 3px;
+  transform: rotate(-45deg);
+}
+
+@media (width >= 900px) {
+  header nav .nav-hamburger {
+    display: none;
+    visibility: hidden;
+  }
+}
+
+/* brand */
+header .nav-brand {
+  grid-area: brand;
+  flex-basis: 128px;
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: 1;
+}
+
+header nav .nav-brand img {
+  width: 128px;
+  height: auto;
+}
+
+/* sections */
+header nav .nav-sections {
+  grid-area: sections;
+  flex: 1 1 auto;
+  display: none;
+  visibility: hidden;
+}
+
+header nav[aria-expanded='true'] .nav-sections {
+  display: block;
+  visibility: visible;
+  align-self: start;
+}
+
+header nav .nav-sections ul {
+  list-style: none;
+  padding-left: 0;
+  font-size: var(--body-font-size-s);
+}
+
+header nav .nav-sections ul > li {
+  font-weight: 500;
+}
+
+header nav .nav-sections .nav-drop > button {
+  all: unset;
+  display: inline-block;
+  position: relative;
+  padding-right: 16px;
+  cursor: pointer;
+}
+
+header nav .nav-sections .nav-drop > button::after {
+  content: '';
+  position: absolute;
+  top: 0.5em;
+  right: 2px;
+  transform: rotate(135deg);
+  width: 6px;
+  height: 6px;
+  border: 2px solid currentcolor;
+  border-radius: 0 1px 0 0;
+  border-width: 2px 2px 0 0;
+}
+
+header nav .nav-sections .nav-drop > button[aria-expanded='true']::after {
+  top: unset;
+  bottom: 0.5em;
+  transform: rotate(315deg);
+}
+
+header nav .nav-sections .nav-drop > button:focus-visible {
+  outline: 2px solid currentcolor;
+  outline-offset: 2px;
+}
+
+header nav .nav-sections ul > li > ul {
+  margin-top: 0;
+}
+
+header nav .nav-sections ul > li > ul > li {
+  font-weight: 400;
+}
+
+header nav .nav-sections .nav-drop > button[aria-expanded='false'] + ul {
+  display: none;
+}
+
+@media (width >= 900px) {
+  header nav .nav-sections {
+    display: block;
+    visibility: visible;
+    white-space: nowrap;
+  }
+
+  header nav .nav-sections ul {
+    display: flex;
+    gap: 24px;
+    margin: 0;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li {
+    flex: 0 1 auto;
+    position: relative;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul {
+    display: none;
+    position: relative;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > button[aria-expanded='true'] + ul {
+    display: block;
+    position: absolute;
+    left: -24px;
+    width: 200px;
+    top: 150%;
+    padding: 16px;
+    background-color: var(--light-color);
+    white-space: initial;
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: 16px;
+    width: 0;
+    height: 0;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 8px solid var(--light-color);
+  }
+
+  header nav .nav-sections .default-content-wrapper > ul > li > ul > li {
+    padding: 8px 0;
+  }
+}
+
+/* tools */
+header nav .nav-tools {
+  grid-area: tools;
+}
+
+/* ------------------------------------------------------------------
+ * Viasat Internet header (nav /viasatinternet/nav)
+ * Scoped to .header-viasatinternet so other sites' headers are unchanged.
+ * Mobile first: below 900px the header is the solid 64px bar with the
+ * address-lookup bar sticking under it; from 900px the desktop header
+ * (utility bar + transparent main bar, scroll-revealed lookup bar).
+ * ------------------------------------------------------------------ */
+/* stylelint-disable no-descending-specificity -- scoped site rules intentionally follow the shared base rules */
+header .header-viasatinternet {
+  --vi-utility-bg: rgb(20 29 36);
+  --vi-ink: rgb(1 38 45);
+  --vi-text: rgb(20 29 36);
+  --vi-muted: rgb(134 151 165);
+  --vi-menu-text: rgb(87 103 117);
+  --vi-divider: rgb(223 231 236);
+  --vi-accent: rgb(255 176 41);
+  --vi-accent-strong: rgb(223 105 1);
+  --vi-teal: rgb(0 118 143);
+  --vi-surface: rgb(242 245 248);
+  --vi-cta-gradient: linear-gradient(111.19deg, rgb(223 105 1) 6.01%, rgb(255 176 41) 119.04%);
+  --vi-cta-gradient-hover: linear-gradient(95.54deg, rgb(168 34 0) -24.09%, rgb(254 145 16) 97.75%);
+  --vi-heading-font: 'Uni Neue', var(--heading-font-family);
+  --vi-body-font: 'Source Sans Pro', var(--body-font-family);
+  --vi-gutter: max(24px, calc((100% - 1152px) / 2));
+}
+
+/* the header (bar + address-lookup bar) sticks to the top and pushes the page down */
+header:has(.header-viasatinternet) {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: auto;
+  min-height: 64px;
+}
+
+header .header-viasatinternet .nav-wrapper {
+  position: relative;
+  background-color: transparent;
+}
+
+/* main bar */
+header .header-viasatinternet .nav-bar {
+  position: relative;
+  z-index: 2;
+  min-height: 64px;
+  background-color: #fff;
+  color: var(--vi-ink);
+}
+
+header .header-viasatinternet nav {
+  display: grid;
+  grid-template: 'brand hamburger' 64px / 1fr auto;
+  gap: 0 16px;
+  max-width: none;
+  height: 64px;
+  margin: 0;
+  padding: 0 16px;
+}
+
+header .header-viasatinternet .nav-brand {
+  justify-self: start;
+  font-size: 16px;
+  font-weight: 400;
+}
+
+header .header-viasatinternet nav .nav-brand a {
+  display: block;
+  line-height: 0;
   text-decoration: none;
 }
 
-header .nav-util li:first-child a:any-link {
-  color: #ffb029;
-}
-
-header .nav-util > div > p,
-header .nav-util-end > div > p {
-  margin: 0;
-}
-
-header .header-main {
-  height: 64px;
-  background-image: linear-gradient(rgb(0 0 0 / 27%), rgb(0 0 0 / 0%)), linear-gradient(rgb(204 76 0), rgb(209 90 0 / 0%));
-}
-
-header .header-main .header-bar {
-  display: grid;
-  grid-template-columns: 1fr auto auto;
-  gap: 16px;
-  align-items: center;
-  height: 100%;
-}
-
-header .nav-brand .icon {
-  display: block;
+header .header-viasatinternet nav .nav-brand img {
+  display: inline-block;
   width: 128px;
   height: 56px;
 }
 
-header .nav-brand a {
-  display: block;
-  line-height: 0;
-}
-
-header .nav-brand a .icon img {
-  display: block;
-}
-
-header .nav-sections {
+/* the bar is always solid on mobile: show the scrolled (gray) logo */
+header .header-viasatinternet nav .nav-brand .nav-brand-logo {
   display: none;
 }
 
-header .nav-sections ul {
+/* hamburger: icon swap (no morph), like the source */
+header .header-viasatinternet nav .nav-hamburger {
+  height: 40px;
+}
+
+header .header-viasatinternet nav .nav-hamburger button {
   display: flex;
-  gap: 8px;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background-color: transparent;
+  color: var(--vi-text);
+  cursor: pointer;
+}
+
+header .header-viasatinternet nav .nav-hamburger button:hover {
+  background-color: rgb(20 29 36 / 8%);
+}
+
+header .header-viasatinternet nav .nav-hamburger-icon {
+  width: 18px;
+}
+
+header .header-viasatinternet nav[aria-expanded='true'] .nav-hamburger-icon::before,
+header .header-viasatinternet nav[aria-expanded='true'] .nav-hamburger-icon::after {
+  width: 20px;
+}
+
+/* menu content is hidden until the hamburger opens the menu */
+header .header-viasatinternet nav .nav-sections,
+header .header-viasatinternet nav .nav-tools,
+header .header-viasatinternet nav .nav-utility {
+  display: none;
+}
+
+/* open menu: full-height panel under the bar */
+header .header-viasatinternet nav[aria-expanded='true'] {
+  position: fixed;
+  inset: 0;
+  z-index: 3;
+  grid-template:
+    'brand hamburger' 64px
+    'sections sections' auto
+    'tools tools' auto
+    'utility utility' 1fr / 1fr auto;
+  height: 100dvh;
+  min-height: 0;
+  padding: 0;
+  overflow-y: auto;
+  background: linear-gradient(#fff 64px, var(--vi-surface) 64px);
+}
+
+header .header-viasatinternet nav[aria-expanded='true'] .nav-brand {
+  padding-left: 16px;
+}
+
+header .header-viasatinternet nav[aria-expanded='true'] .nav-hamburger {
+  padding-right: 16px;
+}
+
+header .header-viasatinternet nav[aria-expanded='true'] .nav-sections {
+  display: block;
+  visibility: visible;
+  padding: 52px 24px 0;
+}
+
+header .header-viasatinternet nav[aria-expanded='true'] .nav-sections ul {
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-header .nav-sections a:any-link,
-header .nav-tools a:any-link {
-  display: inline-flex;
-  align-items: center;
-  box-sizing: border-box;
-  border-radius: 8px;
-  padding: 12px 24px;
-  color: #fff;
-  font-family: var(--heading-font-family);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  white-space: nowrap;
-  text-decoration: none;
+header .header-viasatinternet nav[aria-expanded='true'] .nav-sections li {
+  border-bottom: 1px solid var(--vi-divider);
+  font-weight: 400;
 }
 
-header .nav-tools {
+header .header-viasatinternet nav[aria-expanded='true'] .nav-tools {
+  display: block;
+  padding: 16px 24px 0;
+}
+
+header .header-viasatinternet nav[aria-expanded='true'] .nav-utility {
+  grid-area: utility;
+  align-self: stretch;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 24px 0;
+}
+
+header .header-viasatinternet nav .nav-utility .default-content-wrapper > ul {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 16px;
+  margin: 0;
+  padding: 0 24px;
+  font-size: 14px;
+  line-height: 20px;
+  list-style: none;
+}
+
+/* the mobile menu footer only carries the site switch (first list) */
+header .header-viasatinternet nav .nav-utility .default-content-wrapper > ul:not(:first-child) {
   display: none;
 }
 
-header .nav-tools p,
-header .nav-tools .button-wrapper {
+header .header-viasatinternet nav .nav-sections a:any-link {
+  display: block;
+  padding: 16px 0;
+  font-family: var(--vi-body-font);
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 28px;
+  color: var(--vi-menu-text);
+  text-decoration: none;
+}
+
+header .header-viasatinternet nav .nav-tools a:any-link {
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  height: 48px;
+  padding: 8px 20px;
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: var(--vi-heading-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--vi-ink);
+  text-decoration: none;
+}
+
+header .header-viasatinternet nav .nav-utility a:any-link {
+  font-family: var(--vi-body-font);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  color: var(--vi-text);
+  text-decoration: none;
+}
+
+header .header-viasatinternet nav .nav-utility a[aria-current]:any-link {
+  color: var(--vi-accent-strong);
+}
+
+/* address-lookup + offers bar: in flow under the bar */
+header .header-viasatinternet .nav-sticky-bar {
+  position: relative;
+  z-index: 1;
+}
+
+header .header-viasatinternet .nav-sticky-row {
+  box-sizing: border-box;
+  padding: 8px 16px;
+}
+
+header .header-viasatinternet .nav-sticky-lookup {
+  background-color: var(--vi-surface);
+}
+
+header .header-viasatinternet .nav-sticky-lookup .section,
+header .header-viasatinternet .nav-sticky-lookup .section > div {
+  margin: 0;
+  padding: 0;
+}
+
+header .header-viasatinternet .nav-sticky-lookup .address-lookup {
+  gap: 16px;
+}
+
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-prompt {
+  font-family: var(--vi-heading-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  color: var(--vi-teal);
+  text-align: center;
+}
+
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-form {
+  flex-flow: row wrap;
+  gap: 0 16px;
+  width: 100%;
+  max-width: none;
   margin: 0;
 }
 
-header .nav-tools a:any-link {
-  border-radius: 4px;
-  padding: 12px 16px;
-  background: #fff;
-  color: var(--dark-color);
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-fields {
+  flex: 1 1 0;
+  flex-direction: row;
+  min-width: 0;
 }
 
-header .header-menu {
-  width: 44px;
-  height: 44px;
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-form input {
+  height: 48px;
+  padding: 12px 20px;
+  border: 1px solid var(--vi-muted);
+  border-radius: 8px;
+  background-color: #fff;
+  font-family: var(--vi-body-font);
+  font-size: 16px;
+  line-height: 20px;
+  color: var(--vi-text);
+}
+
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-form .address-lookup-action .button {
+  position: relative;
+  width: 48px;
+  height: 48px;
+  margin: 0;
+  padding: 0;
   border: 0;
   border-radius: 8px;
-  background: transparent;
-  cursor: pointer;
+  background-image: var(--vi-cta-gradient);
+  font-size: 0;
+  color: #fff;
 }
 
-header .header-menu-icon,
-header .header-menu-icon::before,
-header .header-menu-icon::after {
-  display: block;
-  width: 24px;
-  height: 2px;
-  margin: 0 auto;
-  background: #fff;
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-form .address-lookup-action .button::before {
   content: '';
-}
-
-header .header-menu-icon::before {
-  transform: translateY(-7px);
-}
-
-header .header-menu-icon::after {
-  transform: translateY(5px);
-}
-
-header[aria-expanded="true"] .header-main {
-  background: var(--dark-color);
-}
-
-header[aria-expanded="true"] .nav-sections {
   position: absolute;
-  top: 64px;
-  right: 0;
-  left: 0;
-  display: block;
-  padding: 16px 24px;
-  background: var(--dark-color);
+  inset: 14px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'/%3E%3C/svg%3E") center / contain no-repeat;
 }
 
-header[aria-expanded="true"] .nav-sections ul {
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-form .address-lookup-action .button:hover {
+  background-image: var(--vi-cta-gradient-hover);
+}
+
+header .header-viasatinternet .nav-sticky-lookup .address-lookup-message {
+  font-family: var(--vi-body-font);
+  font-size: 14px;
+  color: var(--vi-text);
+}
+
+header .header-viasatinternet .nav-sticky-offers {
+  padding-block: 12px;
+  background-color: var(--vi-teal);
+  color: #fff;
+}
+
+header .header-viasatinternet .nav-carousel {
+  position: relative;
+  padding: 0 32px;
+}
+
+header .header-viasatinternet .nav-carousel-track {
+  overflow: hidden;
+}
+
+header .header-viasatinternet .nav-carousel-slides {
+  display: flex;
+  transition: transform 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+header .header-viasatinternet .nav-carousel-slide {
+  display: flex;
+  flex: 0 0 100%;
   flex-direction: column;
+  justify-content: center;
+  min-height: 44px;
+  text-align: center;
+}
+
+header .header-viasatinternet .nav-carousel-slide p {
+  margin: 0;
+  font-family: var(--vi-body-font);
+  font-size: 12px;
+  line-height: 24px;
+}
+
+header .header-viasatinternet .nav-carousel-slide p:first-child {
+  font-family: var(--vi-heading-font);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+header .header-viasatinternet .nav-carousel-slide strong {
+  font-weight: 900;
+}
+
+header .header-viasatinternet .nav-carousel-arrow {
+  position: absolute;
+  top: 50%;
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 4px;
+  background: none;
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-50%);
+}
+
+header .header-viasatinternet .nav-carousel-arrow::before {
+  content: '';
+  position: absolute;
+  top: 7px;
+  left: 6px;
+  width: 8px;
+  height: 8px;
+  border: solid currentcolor;
+  border-width: 2px 2px 0 0;
+  transform: rotate(-135deg);
+}
+
+header .header-viasatinternet .nav-carousel-prev {
+  left: 0;
+}
+
+header .header-viasatinternet .nav-carousel-next {
+  right: 0;
+}
+
+header .header-viasatinternet .nav-carousel-next::before {
+  left: 4px;
+  transform: rotate(45deg);
 }
 
 @media (width >= 900px) {
-  header .header-util {
+  /* only the utility bar reserves space; the fixed main bar overlays the hero */
+  header:has(.header-viasatinternet) {
+    position: static;
+    height: 44px;
+    min-height: 0;
+  }
+
+  header .header-viasatinternet .nav-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
     display: block;
+    width: 100%;
   }
 
-  header .header-main {
-    height: 92px;
+  /* utility bar */
+  header .header-viasatinternet .nav-utility {
+    position: relative;
+    z-index: 3;
+    display: grid;
+    grid-template-rows: 1fr;
+    background-color: var(--vi-utility-bg);
+    transition: grid-template-rows 0.2s;
   }
 
-  header .header-main .header-bar {
-    grid-template-columns: 1fr auto 1fr;
+  header .header-viasatinternet.is-utility-hidden .nav-utility {
+    grid-template-rows: 0fr;
+  }
+
+  header .header-viasatinternet .nav-utility .default-content-wrapper {
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    min-height: 0;
+    margin: 0 auto;
+    padding: 0 24px;
+    overflow: hidden;
+  }
+
+  header .header-viasatinternet .nav-utility .default-content-wrapper > ul {
+    display: flex;
     gap: 32px;
+    margin: 0;
+    padding: 12px 0;
+    font-size: 14px;
+    line-height: 20px;
+    list-style: none;
   }
 
-  header .nav-sections,
-  header .nav-tools {
+  /* main bar: transparent gradient over the hero, white layer fades in when scrolled */
+  header .header-viasatinternet .nav-bar {
+    background-color: transparent;
+    background-image: linear-gradient(rgb(0 0 0 / 27%), rgb(0 0 0 / 0%)), linear-gradient(rgb(204 76 0), rgb(209 90 0 / 0%));
+    color: #fff;
+  }
+
+  header .header-viasatinternet .nav-bar::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: #fff;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  header .header-viasatinternet.is-scrolled .nav-bar {
+    color: var(--vi-ink);
+  }
+
+  header .header-viasatinternet.is-scrolled .nav-bar::before {
+    opacity: 1;
+  }
+
+  header .header-viasatinternet nav {
+    position: relative;
+    grid-template: 'brand sections tools' 92px / 1fr auto 1fr;
+    gap: 16px 32px;
+    max-width: 1200px;
+    height: 92px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header .header-viasatinternet nav .nav-brand .nav-brand-logo {
+    display: inline-block;
+  }
+
+  header .header-viasatinternet nav .nav-brand .nav-brand-logo-alt,
+  header .header-viasatinternet.is-scrolled nav .nav-brand .nav-brand-logo {
+    display: none;
+  }
+
+  header .header-viasatinternet.is-scrolled nav .nav-brand .nav-brand-logo-alt {
+    display: inline-block;
+  }
+
+  header .header-viasatinternet nav .nav-sections {
     display: block;
+    visibility: visible;
+    justify-self: center;
   }
 
-  header .nav-tools {
+  header .header-viasatinternet nav .nav-sections ul {
+    gap: 8px;
+    font-size: 16px;
+  }
+
+  header .header-viasatinternet nav .nav-tools {
+    display: block;
     justify-self: end;
   }
 
-  header .header-menu {
-    display: none;
+  /* address-lookup bar: revealed under the header once scrolled */
+  header .header-viasatinternet .nav-sticky-bar {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-100%);
+    transition: transform 0.2s cubic-bezier(0.7, 0, 0.84, 0), opacity 0.15s ease-in, visibility 0s linear 0.2s;
+  }
+
+  header .header-viasatinternet.is-scrolled .nav-sticky-bar {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s, opacity 0.3s ease-out 0.05s;
+  }
+
+  header .header-viasatinternet .nav-sticky-row {
+    padding: 8px var(--vi-gutter);
+  }
+
+  header .header-viasatinternet .nav-sticky-lookup {
+    min-height: 64px;
+  }
+
+  header .header-viasatinternet .nav-sticky-lookup .address-lookup {
+    gap: 32px;
+  }
+
+  header .header-viasatinternet .nav-sticky-lookup .address-lookup-prompt {
+    flex: 1 1 auto;
+    text-align: start;
+  }
+
+  header .header-viasatinternet .nav-sticky-lookup .address-lookup-lookup {
+    flex: 0 0 auto;
+  }
+
+  header .header-viasatinternet .nav-sticky-lookup .address-lookup-form {
+    justify-content: flex-end;
+    width: auto;
+  }
+
+  header .header-viasatinternet .nav-sticky-lookup .address-lookup-fields {
+    flex: 0 0 256px;
+  }
+
+  header .header-viasatinternet .nav-sticky-offers {
+    padding: 12px var(--vi-gutter);
+  }
+
+  header .header-viasatinternet .nav-carousel {
+    padding: 0 48px;
+  }
+
+  /* desktop link styles */
+  header .header-viasatinternet .nav-utility a:any-link {
+    font-family: var(--vi-body-font);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 20px;
+    color: var(--vi-muted);
+    text-decoration: none;
+  }
+
+  header .header-viasatinternet nav .nav-sections a:any-link {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    height: 48px;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-family: var(--vi-heading-font);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 20px;
+    color: currentcolor;
+  }
+
+  header .header-viasatinternet nav .nav-tools a:any-link {
+    height: 44px;
+    padding: 12px 20px;
+    border-radius: 4px;
+  }
+
+  /* link states (after base link rules: no-descending-specificity) */
+  header .header-viasatinternet .nav-utility a[aria-current]:any-link {
+    color: var(--vi-accent);
+  }
+
+  header .header-viasatinternet .nav-utility a:any-link:hover {
+    text-decoration: underline;
+  }
+
+  header .header-viasatinternet nav .nav-sections a:any-link:hover {
+    background-color: rgb(255 255 255 / 8%);
+  }
+
+  header .header-viasatinternet nav .nav-tools a:any-link:hover {
+    background-color: var(--vi-surface);
+  }
+
+  header .header-viasatinternet.is-scrolled nav .nav-tools a:any-link {
+    background-color: transparent;
+    background-image: var(--vi-cta-gradient);
+    color: #fff;
+  }
+
+  header .header-viasatinternet.is-scrolled nav .nav-sections a:any-link:hover {
+    background-color: rgb(20 29 36 / 8%);
+  }
+
+  header .header-viasatinternet.is-scrolled nav .nav-tools a:any-link:hover {
+    background-image: var(--vi-cta-gradient-hover);
   }
 }

@@ -1,0 +1,172 @@
+/*
+ * Carousel (photo), measured from viasatinternet.com (plans "Stay close" slider):
+ * - the track starts at the content edge and bleeds to the viewport edge
+ * - slide width follows the source glide setup: 1.25 slides per view on mobile,
+ *   3.5 on desktop, 16px gap
+ * - photo card: 16px radius, dark bottom-to-top gradient, content 144px from the
+ *   top with 32px side/bottom padding, white 20/28 title + 16/20 bold text
+ * - centered 68x44 neutral-filled arrow buttons, 16px below the track
+ */
+.carousel-photo {
+  /* distance from the content edge to the viewport edge (scrollbar excluded);
+     cqw resolves against this block, so the value also works in scroll-padding */
+  --carousel-photo-bleed: calc(50vw - 50cqw - var(--carousel-photo-scrollbar, 0px) / 2);
+  --carousel-photo-gap: 16px;
+  --carousel-photo-per-view: 1.25;
+
+  container-type: inline-size;
+}
+
+.carousel-photo .carousel-photo-slides-container {
+  position: relative;
+}
+
+.carousel-photo .carousel-photo-slides {
+  display: flex;
+  gap: var(--carousel-photo-gap);
+  margin: 0 calc(-1 * var(--carousel-photo-bleed));
+  padding: 0 0 0 var(--carousel-photo-bleed);
+  list-style: none;
+  overflow: scroll clip;
+  scroll-behavior: smooth;
+  scroll-padding-inline-start: var(--carousel-photo-bleed);
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+}
+
+.carousel-photo .carousel-photo-slides::-webkit-scrollbar {
+  display: none;
+}
+
+.carousel-photo .carousel-photo-slide {
+  position: relative;
+  flex: 0 0 calc((100% + var(--carousel-photo-gap)) / var(--carousel-photo-per-view) - var(--carousel-photo-gap));
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  isolation: isolate;
+  scroll-snap-align: start;
+}
+
+/* photo fills the card; the gradient sits on top of it */
+.carousel-photo .carousel-photo-slide-image {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+
+.carousel-photo .carousel-photo-slide-image::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(0deg, var(--viasat-gray-1000) 20.66%, rgb(32 46 57 / 0%) 50%);
+}
+
+.carousel-photo .carousel-photo-slide-image picture,
+.carousel-photo .carousel-photo-slide-image p {
+  display: block;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+}
+
+.carousel-photo .carousel-photo-slide-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.carousel-photo .carousel-photo-slide-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 144px 32px 32px;
+  color: var(--viasat-on-dark-text);
+  text-align: start;
+}
+
+.carousel-photo .carousel-photo-slide-content > * {
+  margin: 0;
+}
+
+/* title-only cards (installation mounts): the source text box adds its own 144px
+   top spacing on top of the card's, so the photo shows more above the title */
+.carousel-photo .carousel-photo-slide-content:has(> :is(h1, h2, h3, h4, h5, h6):only-child) {
+  padding-top: 288px;
+}
+
+.carousel-photo .carousel-photo-slide-content :is(h1, h2, h3, h4, h5, h6) {
+  color: var(--viasat-on-dark-text);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-m);
+  font-weight: 700;
+  line-height: var(--heading-line-height-m);
+}
+
+.carousel-photo .carousel-photo-slide-content p {
+  color: var(--viasat-on-dark-text);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 700;
+  line-height: var(--heading-line-height-xs);
+}
+
+/* arrows: source bm-button neutral filled, md, icon only */
+.carousel-photo .carousel-photo-navigation-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.carousel-photo .carousel-photo-navigation-buttons button {
+  position: relative;
+  box-sizing: border-box;
+  width: 68px;
+  height: 44px;
+  margin: 0;
+  border: 0;
+  border-radius: var(--viasat-button-radius);
+  padding: 0;
+  background-color: var(--viasat-btn-primary-bg, var(--viasat-white));
+  color: var(--viasat-btn-primary-fg, var(--viasat-ink-heading));
+  cursor: pointer;
+}
+
+.carousel-photo .carousel-photo-navigation-buttons button:hover {
+  background-color: var(--viasat-btn-primary-bg-hover, var(--viasat-gray-100));
+}
+
+.carousel-photo .carousel-photo-navigation-buttons button:focus-visible {
+  outline: 2px solid var(--viasat-focus);
+  outline-offset: 2px;
+}
+
+/* Material arrow_back / arrow_forward, 20px */
+.carousel-photo .carousel-photo-navigation-buttons button::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M20 11H7.83l5.59-5.59L12 4l-8 8 8 8 1.41-1.41L7.83 13H20v-2z'/%3E%3C/svg%3E") center / contain no-repeat;
+  transform: translate(-50%, -50%);
+}
+
+.carousel-photo .carousel-photo-navigation-buttons button.slide-next::after {
+  transform: translate(-50%, -50%) scaleX(-1);
+}
+
+@media (width >= 900px) {
+  .carousel-photo {
+    --carousel-photo-per-view: 3.5;
+  }
+}

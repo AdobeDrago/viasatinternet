@@ -1,0 +1,31 @@
+{
+  "variantName": "columns-badge",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Small award badge image beside a heading, centered",
+    "observed": [
+      "Source row: CNET Best of 2026 badge image beside h2 'Viasat named among Best Satellite Internet Providers for 2026' (+ hidden footnote modal)",
+      "CNET Best of 2026 badge beside h2 'Viasat named among Best Satellite Internet Providers for 2026'"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row: [badge image | heading]",
+    "pages": [
+      "home",
+      "plans"
+    ],
+    "sectionStyles": [
+      "cream",
+      "centered"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "CNET \"Best of 2026\" award row on home and plans.",
+  "reuseGuidance": "Author as \"Columns Badge\".",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/",
+    "https://www.viasatinternet.com/satellite-internet/plans/"
+  ]
+}

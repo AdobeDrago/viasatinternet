@@ -1,0 +1,135 @@
+/*
+ * Hero (promo): rounded photo banner inside a section band.
+ * Values from the source hero (bm-box radius-lg, p-200 / px-125, min-height 400px,
+ * 12:5 banner from 768px up, body slots max 416px, gap-150 / gap-200).
+ */
+.hero-promo {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
+  min-height: 400px;
+  padding: 32px 20px;
+  border-radius: 16px;
+}
+
+.hero-promo .hero-promo-media,
+.hero-promo .hero-promo-media picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  overflow: hidden;
+  border-radius: inherit;
+}
+
+.hero-promo .hero-promo-media picture {
+  z-index: auto;
+}
+
+/* source orange corner fade over the photo (picture::after) */
+.hero-promo .hero-promo-media picture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: linear-gradient(108.14deg, rgb(235 98 0 / 60%) 3.95%, rgb(235 98 0 / 0%) 36.87%);
+  pointer-events: none;
+}
+
+.hero-promo .hero-promo-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+.hero-promo .hero-promo-content {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.hero-promo .hero-promo-offer,
+.hero-promo .hero-promo-savings {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-promo .hero-promo-offer {
+  gap: 24px;
+}
+
+.hero-promo .hero-promo-savings {
+  gap: 32px;
+}
+
+.hero-promo .hero-promo-content :is(h1, h2, h3, h4, p),
+.hero-promo .hero-promo-content p.button-wrapper {
+  margin: 0;
+  text-shadow: none;
+}
+
+/* offer heading: source heading-2xl (24.5-32px / 36-40px) */
+.hero-promo .hero-promo-offer :is(h1, h2, h3, h4) {
+  font-size: var(--heading-font-size-xl);
+  line-height: var(--heading-line-height-xl);
+}
+
+/* disclaimer: 12px body-xs text on the 24px body-md line box */
+.hero-promo .hero-promo-savings p {
+  font-size: var(--body-font-size-xs);
+  line-height: 24px;
+}
+
+/* eyebrow above the offer heading ("LIMITED-TIME OFFER"): source label-xs */
+.hero-promo .hero-promo-offer p:not(.button-wrapper) {
+  font-size: var(--body-font-size-xs);
+  font-weight: 600;
+  line-height: 20px;
+}
+
+/* savings heading: source heading-3xl (28-40px / 36-48px) */
+.hero-promo .hero-promo-savings :is(h1, h2, h3, h4) {
+  font-size: clamp(1.75rem, 2vw + 1.15rem, 2.5rem);
+  line-height: clamp(2.25rem, 2.375vw + 1.5rem, 3rem);
+}
+
+/*
+ * Banners with an eyebrow label (CAF II "LIMITED-TIME OFFER") use the compact source
+ * heading-xl (28px / 36px) for both headings.
+ */
+.hero-promo:has(.hero-promo-offer > p:first-child:not(.button-wrapper)) .hero-promo-content :is(h1, h2, h3, h4) {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+@media (width >= 900px) {
+  .hero-promo {
+    aspect-ratio: 12 / 5;
+    min-height: auto;
+    padding: 32px;
+  }
+
+  .hero-promo .hero-promo-media picture::after {
+    background-image: var(--viasat-hero-orange-fade);
+  }
+
+  .hero-promo .hero-promo-content {
+    flex-direction: row;
+    align-items: center;
+    gap: 0;
+  }
+
+  .hero-promo .hero-promo-offer,
+  .hero-promo .hero-promo-savings {
+    flex: 0 1 auto;
+    max-width: 416px;
+  }
+
+  .hero-promo .hero-promo-savings {
+    text-align: right;
+  }
+}

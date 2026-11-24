@@ -1,0 +1,32 @@
+{
+  "variantName": "address-lookup",
+  "baseBlock": "address-lookup",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Address availability lookup: prompt text plus an address field that redirects to the authored destination",
+    "observed": []
+  },
+  "contentPattern": {
+    "structure": "row 1: prompt text (optional); row 2: link \"Check availability\" -> https://buy.viasat.com/en-US/r/ (href = destination, text = button label)",
+    "pages": [
+      "home"
+    ],
+    "sectionStyles": []
+  },
+  "options": [
+    {
+      "class": "same-window",
+      "label": "Open destination in the same window"
+    },
+    {
+      "class": "unit",
+      "label": "Show unit / apartment field"
+    }
+  ],
+  "memberVariantIds": [],
+  "usage": "Shared CTA band fragment /viasatinternet/fragments/address-lookup. Submit logic lives in scripts/address-lookup.js (also used by hero-lookup): countryCode=US is added for buy.viasat.com, addressLine1 = address, addressLine2 = unit (if the unit option is on and filled); an empty address shows \"Enter your address\". Cross-host destinations open in a new tab (noopener) unless the \"same-window\" option or a link target is set. No autocomplete (the source /bin/autoCompleteAddress is not migrated).",
+  "reuseGuidance": "Author as \"Address Lookup\". Form CSS is shared in styles/address-lookup.css.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/"
+  ]
+}
