@@ -1,0 +1,371 @@
+/* stylelint-disable no-descending-specificity -- table rules first, cards-layout overrides after */
+
+/*
+ * Table Comparison: source bm "comparison-chart".
+ * Table layout: label column + equal plan columns, 16px column gap, each column a rounded
+ * 16px-padded panel (plan columns of a chart with a CTA row are shaded, the highlight column is
+ * cream), 16px row padding, inset dividers from the second body row on.
+ * Cards layout (.table-comparison-cards, set by JS when a column would be < 200px wide):
+ * title, segmented switcher, then the active plan as one card with each feature label
+ * stacked above its value.
+ */
+
+.table-comparison {
+  --table-comparison-divider: #d1dae0;
+  --table-comparison-shade: transparent;
+  --table-comparison-card-bg: var(--table-comparison-shade);
+
+  position: relative;
+  width: 100%;
+  color: var(--viasat-ink, var(--text-color));
+  text-align: center;
+}
+
+/* plan chart (has a CTA row): plan columns sit on the light surface */
+.table-comparison:has(.table-comparison-cta-row) {
+  --table-comparison-shade: var(--viasat-gray-100, #f2f5f8);
+}
+
+.table-comparison.table-comparison-active-highlight {
+  --table-comparison-card-bg: var(--viasat-warm-100, #fff6e1);
+}
+
+.table-comparison table {
+  width: calc(100% + 32px);
+  margin: 0 -16px;
+  table-layout: fixed;
+  border-collapse: separate;
+  border-spacing: 16px 0;
+}
+
+.table-comparison :is(th, td) {
+  padding: 16px;
+  border: 0;
+  background-color: var(--table-comparison-shade);
+  color: inherit;
+  font-family: var(--body-font-family);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 24px;
+  text-align: center;
+  text-wrap: balance;
+  vertical-align: middle;
+}
+
+.table-comparison .table-comparison-label {
+  background-color: transparent;
+  text-align: left;
+  text-wrap: pretty;
+}
+
+.table-comparison :is(th, td).table-comparison-highlight {
+  background-color: var(--viasat-warm-100, #fff6e1);
+}
+
+/* column panel: 16px column padding on top of the 16px row padding, 24px at the bottom */
+.table-comparison thead :is(th, td) {
+  padding-top: 32px;
+  border-radius: 16px 16px 0 0;
+  vertical-align: top;
+}
+
+.table-comparison tbody tr:last-child > * {
+  padding-bottom: 40px;
+  border-radius: 0 0 16px 16px;
+}
+
+/* row dividers (1px, inset by the column padding) from the second body row on */
+.table-comparison tbody tr + tr > * {
+  padding-top: 17px;
+  background-image: linear-gradient(var(--table-comparison-divider), var(--table-comparison-divider));
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: calc(100% - 32px) 1px;
+}
+
+/* the label column has no CTA cell: no divider above the empty cell */
+.table-comparison tbody tr.table-comparison-cta-row > .table-comparison-label {
+  background-image: none;
+}
+
+.table-comparison :is(th, td) :is(p, h2, h3, h4) {
+  margin: 0;
+}
+
+/* header: title, eyebrow, plan name, tagline (bm-box gap 8px) */
+.table-comparison thead :is(th, td) > * + * {
+  margin-top: 8px;
+}
+
+.table-comparison thead p {
+  color: var(--viasat-text-secondary, #576775);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.table-comparison thead p:has(> strong),
+.table-comparison .table-comparison-title p {
+  color: inherit;
+  font-family: var(--heading-font-family);
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 28px;
+}
+
+/* provider header: name + price line (heading-xs) */
+.table-comparison thead p:first-child:has(> strong) ~ p:not(:has(strong)) {
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.table-comparison thead h2 {
+  font-size: 28px;
+  line-height: 36px;
+}
+
+.table-comparison thead h3 {
+  font-size: 24px;
+  line-height: 32px;
+}
+
+/* feature labels: plain text = label-lg, bold = heading-sm (+ sublabel) */
+.table-comparison tbody th p {
+  font-size: 18px;
+  font-weight: 600;
+  line-height: 28px;
+}
+
+.table-comparison tbody th p:has(strong) {
+  font-family: var(--heading-font-family);
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.table-comparison tbody th p:has(strong) ~ p,
+.table-comparison td p + p:not(:has(strong)) {
+  color: var(--viasat-text-secondary, #576775);
+  font-family: var(--body-font-family);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.table-comparison tbody th strong:has(.icon) {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.table-comparison tbody th .icon {
+  flex: none;
+  width: 20px;
+  height: 20px;
+}
+
+/* values: bold = heading-sm, price = heading-md, sublines = label-sm */
+.table-comparison td p:has(> strong) {
+  font-family: var(--heading-font-family);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+}
+
+.table-comparison td p:not(:has(strong)) + p:not(:has(strong)) {
+  margin-top: 16px;
+}
+
+.table-comparison .table-comparison-price p:has(> strong) {
+  font-size: 20px;
+  line-height: 28px;
+}
+
+.table-comparison .table-comparison-price p + p:not(:has(strong)) {
+  color: inherit;
+}
+
+.table-comparison td p.table-comparison-offer {
+  color: var(--viasat-warm-600, #df6901);
+  font-size: 16px;
+  line-height: 20px;
+}
+
+.table-comparison .table-comparison-dash p {
+  color: var(--viasat-text-secondary, #576775);
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* value icons: plain check (md) by default */
+.table-comparison td .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  margin-inline: auto;
+}
+
+.table-comparison .icon img {
+  width: 100%;
+  height: 100%;
+}
+
+/* charts that mark missing features with :check-none: use filled circles (xl, 28px) */
+.table-comparison:has(.icon-check-none) td .icon:is(.icon-check, .icon-check-none) {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--viasat-gray-600, #8697a5);
+}
+
+.table-comparison:has(.icon-check-none) td.table-comparison-highlight .icon-check {
+  background-color: var(--viasat-warm-600, #df6901);
+}
+
+.table-comparison:has(.icon-check-none) td .icon.icon-check-none {
+  background-color: var(--table-comparison-divider);
+}
+
+.table-comparison:has(.icon-check-none) td .icon:is(.icon-check, .icon-check-none) img {
+  display: none;
+}
+
+.table-comparison:has(.icon-check-none) td .icon-check::after {
+  content: '';
+  width: 20px;
+  height: 20px;
+  background-color: var(--viasat-gray-100, #f2f5f8);
+  mask: url('../../icons/check.svg') center / 20px 20px no-repeat;
+}
+
+/* CTA row: full-width accent button */
+.table-comparison .table-comparison-cta-row .button-wrapper {
+  margin: 0;
+}
+
+main .table-comparison .table-comparison-cta-row a.button:any-link {
+  width: 100%;
+  margin: 0;
+}
+
+.table-comparison .table-comparison-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* segmented column switcher (cards layout only) */
+.table-comparison .table-comparison-switcher {
+  display: none;
+}
+
+.table-comparison.table-comparison-cards {
+  display: flex;
+  flex-direction: column;
+}
+
+.table-comparison.table-comparison-cards :is(table, thead, tbody, tr) {
+  display: contents;
+}
+
+.table-comparison.table-comparison-cards tbody tr > *,
+.table-comparison.table-comparison-cards :is(th, td) {
+  display: none;
+  padding: 16px;
+  border-radius: 0;
+  background-color: var(--table-comparison-card-bg);
+  background-image: none;
+  text-align: center;
+}
+
+.table-comparison.table-comparison-cards :is(th.table-comparison-label, .table-comparison-active) {
+  display: block;
+}
+
+.table-comparison.table-comparison-cards .table-comparison-title {
+  order: -2;
+  padding: 32px 0 40px;
+  background-color: transparent;
+}
+
+.table-comparison.table-comparison-cards .table-comparison-switcher {
+  display: flex;
+  order: -1;
+  margin-bottom: 16px;
+  padding: 8px;
+  border-radius: 16px;
+  background-color: var(--viasat-gray-100, #f2f5f8);
+}
+
+.table-comparison .table-comparison-switcher button {
+  flex: 1 1 auto;
+  min-width: 0;
+  min-height: 48px;
+  margin: 0;
+  padding: 0 12px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--viasat-ink-heading, #01262d);
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+.table-comparison .table-comparison-switcher button + button {
+  margin-left: -1px;
+}
+
+.table-comparison .table-comparison-switcher button[aria-pressed='true'] {
+  background-color: var(--viasat-white, #fff);
+}
+
+.table-comparison .table-comparison-switcher button:focus-visible {
+  outline: 2px solid var(--viasat-focus, #0095e0);
+  outline-offset: 2px;
+}
+
+.table-comparison.table-comparison-cards thead .table-comparison-active {
+  padding-top: 32px;
+  border-radius: 16px 16px 0 0;
+}
+
+.table-comparison.table-comparison-cards tbody tr:last-child > .table-comparison-active {
+  padding-bottom: 40px;
+  border-radius: 0 0 16px 16px;
+}
+
+/* stacked feature label: inset divider above, sits directly on its value */
+.table-comparison.table-comparison-cards tbody tr > th.table-comparison-label {
+  padding-top: 17px;
+  padding-bottom: 0;
+  border-radius: 0;
+  background-image: linear-gradient(var(--table-comparison-divider), var(--table-comparison-divider));
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: calc(100% - 32px) 1px;
+}
+
+.table-comparison.table-comparison-cards tbody th p:first-child {
+  color: var(--viasat-text-secondary, #576775);
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+}
+
+.table-comparison.table-comparison-cards tbody th strong:has(.icon) {
+  display: inline;
+}
+
+.table-comparison.table-comparison-cards tbody th .icon {
+  display: none;
+}

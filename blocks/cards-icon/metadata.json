@@ -1,0 +1,27 @@
+{
+  "variantName": "cards-icon",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Icon tiles (icon, title, text, arrow link) inside one white rounded panel",
+    "observed": [
+      "White rounded panel with 3 source tiles: icon (Headset, SupportAgent, Policy), title, text, arrow link (Call 1-855-463-9333 / Call 1-866-547-7247 / File a claim)"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per tile, one cell: icon (\":headset:\") first, h3 title, paragraph, link",
+    "pages": [
+      "easycare"
+    ],
+    "sectionStyles": [
+      "cream, centered"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "\"Need help?\" tiles on easycare; add-ons (8 tiles), cyberprotect (9 tiles).",
+  "reuseGuidance": "Author as \"Cards Icon\". Icons need SVGs in /icons (headset.svg, support-agent.svg, policy.svg, ...).",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/"
+  ]
+}

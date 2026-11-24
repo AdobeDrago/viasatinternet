@@ -1,0 +1,274 @@
+/*
+ * Hero Lookup (viasatinternet.com page hero, source data-block-name="hero" with an h1).
+ * Values measured from source computed styles at 375 and 1440 (home, easycare).
+ * Default: full-bleed photo, content centered at the bottom, glass address form.
+ * `left`: content column on the left (photo stacked on top below 900px).
+ */
+
+.hero-lookup-container .hero-lookup-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+.hero-lookup {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  min-height: 600px;
+  padding: 0 20px 32px;
+  color: var(--viasat-on-dark-text);
+}
+
+.hero-lookup .hero-lookup-media picture {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+
+.hero-lookup .hero-lookup-media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+/* ---------- content ---------- */
+.hero-lookup .hero-lookup-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+  width: 100%;
+  max-width: var(--viasat-content-max-width);
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hero-lookup .hero-lookup-content > * {
+  margin: 0;
+  color: var(--viasat-on-dark-text);
+  text-shadow: none;
+}
+
+/* source heading-3xl: 32px/40px at 375, 48px/56px from 1024 */
+.hero-lookup .hero-lookup-content > h1 {
+  font-size: clamp(32px, 3vw + 18.4px, 48px);
+  line-height: calc(1em + 8px);
+}
+
+/* subheading and promo line (source bm-sem-typo-heading-md) */
+.hero-lookup .hero-lookup-content > p:not(.button-wrapper, .hero-lookup-disclaimer) {
+  font-family: var(--heading-font-family);
+  font-size: var(--viasat-lead-font-size);
+  font-weight: 700;
+  line-height: var(--viasat-lead-line-height);
+}
+
+/* source: 12px legal text in a 24px line box */
+.hero-lookup .hero-lookup-content > .hero-lookup-disclaimer {
+  font-size: var(--body-font-size-xs);
+  line-height: 24px;
+}
+
+/* ---------- glass address form ---------- */
+.hero-lookup .hero-lookup-content > .address-lookup-form {
+  box-sizing: border-box;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+  max-width: 100%;
+  border: 1px solid var(--viasat-text-secondary);
+  border-radius: 12px;
+  padding: 8px;
+  background-color: rgb(20 29 36 / 52%);
+  backdrop-filter: blur(20px);
+  text-align: start;
+}
+
+.hero-lookup .address-lookup-form .address-lookup-fields {
+  flex: 1 1 0;
+  flex-direction: row;
+  gap: 0;
+  min-width: 0;
+}
+
+.hero-lookup .address-lookup-form .address-lookup-field {
+  flex: 1 1 auto;
+}
+
+.hero-lookup .address-lookup-form input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 40px;
+  min-height: 40px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 0 16px;
+  background: transparent;
+  color: var(--viasat-on-dark-text);
+  font-family: var(--body-font-family);
+  font-size: var(--body-font-size-m);
+  line-height: 20px;
+}
+
+.hero-lookup .address-lookup-form input::placeholder {
+  color: var(--viasat-on-dark-text);
+  opacity: 1;
+}
+
+.hero-lookup .address-lookup-form input:focus-visible {
+  outline: 2px solid var(--viasat-focus);
+  outline-offset: 0;
+}
+
+.hero-lookup .address-lookup-form .address-lookup-action {
+  flex: none;
+}
+
+/* mobile: 48px square orange button with the arrow only (label stays the accessible name) */
+.hero-lookup .address-lookup-form .address-lookup-action .button {
+  width: 48px;
+  height: 48px;
+  min-height: 48px;
+  padding: 0;
+  background-color: transparent;
+  background-image: var(--viasat-cta-gradient);
+  color: var(--viasat-white);
+  font-size: 0;
+}
+
+.hero-lookup .address-lookup-form .address-lookup-action .button:hover {
+  background-image: var(--viasat-cta-gradient-hover);
+}
+
+.hero-lookup .address-lookup-form .address-lookup-action .button:is(:focus-visible, :active) {
+  background-image: var(--viasat-cta-gradient-pressed);
+}
+
+.hero-lookup .address-lookup-form .address-lookup-action .button::after {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+.hero-lookup .address-lookup-form .address-lookup-message {
+  flex-basis: 100%;
+  padding: 4px 16px 0;
+  color: var(--viasat-on-dark-text);
+  font-size: var(--body-font-size-s);
+}
+
+/* ---------- CTA buttons (left option; source bm-button lg) ---------- */
+.hero-lookup .hero-lookup-content > .button-wrapper + .button-wrapper {
+  margin-top: -8px;
+}
+
+.hero-lookup .hero-lookup-content a.button:is(.primary, .secondary, .accent) {
+  min-height: 56px;
+  padding: 16px 20px;
+  font-size: 18px;
+  line-height: 24px;
+}
+
+/* ---------- left option ---------- */
+.hero-lookup.left {
+  justify-content: flex-start;
+
+  /* auto (not 0): with the desktop aspect-ratio the hero still grows to fit taller content */
+  min-height: auto;
+}
+
+.hero-lookup.left .hero-lookup-media {
+  position: relative;
+  aspect-ratio: 1;
+  margin: 0 -20px 32px;
+}
+
+.hero-lookup.left .hero-lookup-media picture::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: var(--viasat-hero-dark-fade);
+}
+
+.hero-lookup.left .hero-lookup-content > h1 {
+  font-size: clamp(28px, 2vw + 18.4px, 40px);
+}
+
+.hero-lookup.left .hero-lookup-content > .button-wrapper {
+  align-self: stretch;
+}
+
+.hero-lookup.left .hero-lookup-content a.button:is(.primary, .secondary, .accent) {
+  width: 100%;
+  justify-content: space-between;
+  text-align: start;
+}
+
+@media (width >= 600px) {
+  .hero-lookup.left .hero-lookup-media {
+    aspect-ratio: 11 / 8;
+  }
+}
+
+@media (width >= 900px) {
+  .hero-lookup {
+    aspect-ratio: 15 / 8;
+    min-height: auto;
+    padding: 0 32px 32px;
+  }
+
+  .hero-lookup .hero-lookup-content > .address-lookup-form {
+    gap: 32px;
+    width: auto;
+  }
+
+  .hero-lookup .address-lookup-form .address-lookup-fields {
+    flex: none;
+    width: 256px;
+  }
+
+  .hero-lookup .address-lookup-form .address-lookup-action .button {
+    width: auto;
+    padding: 8px 16px;
+    font-size: var(--viasat-button-font-size);
+  }
+
+  /* left: photo full-bleed behind a left column, vertically centered */
+  .hero-lookup.left {
+    justify-content: center;
+    padding: 32px;
+  }
+
+  .hero-lookup.left .hero-lookup-media {
+    position: static;
+    aspect-ratio: auto;
+    margin: 0;
+  }
+
+  .hero-lookup.left .hero-lookup-content {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .hero-lookup.left .hero-lookup-content > * {
+    max-width: calc(50% - 8px);
+  }
+
+  .hero-lookup.left .hero-lookup-content > .button-wrapper {
+    align-self: flex-start;
+  }
+
+  .hero-lookup.left .hero-lookup-content a.button:is(.primary, .secondary, .accent) {
+    width: auto;
+    justify-content: center;
+  }
+}

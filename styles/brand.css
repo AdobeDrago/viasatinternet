@@ -1,0 +1,115 @@
+/*
+ * Brand design tokens (design migration marker).
+ * Viasat Internet tokens are scoped to body.viasatinternet (Metadata "Template: viasatinternet"),
+ * so the other site served from this project keeps the :root values in styles.css.
+ * Values measured from https://www.viasatinternet.com/ computed styles (see migration-work/brand.json).
+ */
+
+body.viasatinternet {
+  /* palette (source "bm" design-system primitives) */
+  --viasat-ink: #141d24; /* sem text-primary / action-neutral / dark surface-00 */
+  --viasat-ink-heading: #01262d; /* teal-1100, heading + neutral-button label */
+  --viasat-text-secondary: #576775;
+  --viasat-text-tertiary: #667a89;
+  --viasat-white: #fff;
+  --viasat-gray-100: #f2f5f8; /* light surface-00 */
+  --viasat-gray-200: #dfe7ec;
+  --viasat-gray-600: #8697a5;
+  --viasat-gray-900: #32424e;
+  --viasat-gray-1000: #202e39;
+  --viasat-teal: #00768f; /* inline link on light surfaces */
+  --viasat-teal-light: #43bfd6; /* inline link on dark surfaces */
+  --viasat-warm-100: #fff6e1; /* cream surface */
+  --viasat-warm-400: #ffb029;
+  --viasat-warm-500: #fe9110;
+  --viasat-warm-600: #df6901;
+  --viasat-warm-700: #a82200;
+  --viasat-orange-band: #f89705;
+  --viasat-focus: #0095e0;
+
+  /* surfaces (Section Metadata styles) */
+  --viasat-surface-cream: var(--viasat-warm-100);
+  --viasat-surface-orange: var(--viasat-orange-band);
+  --viasat-surface-dark: var(--viasat-ink);
+  --viasat-surface-light: #fff; /* source surface-00-alt in the light theme */
+  --viasat-surface-dark-alt: var(--viasat-gray-1000); /* surface-00-alt in the dark theme */
+
+  /* text on dark / photo backgrounds */
+  --viasat-on-dark-text: #fff;
+  --viasat-on-dark-text-secondary: #c3cdd5;
+  --viasat-on-dark-link: var(--viasat-teal-light);
+
+  /* gradients */
+  --viasat-cta-gradient: linear-gradient(111.19deg, #df6901 6.01%, #ffb029 119.04%);
+  --viasat-cta-gradient-hover: linear-gradient(95.54deg, #a82200 -24.09%, #fe9110 97.75%);
+  --viasat-cta-gradient-pressed: linear-gradient(96.89deg, #a82200 -13.2%, #fe9110 149.61%);
+  --viasat-hero-orange-fade: linear-gradient(134.42deg, rgb(235 98 0 / 60%) 3.95%, rgb(235 98 0 / 0%) 36.87%);
+  --viasat-hero-dark-fade: linear-gradient(119.31deg, rgb(0 0 0 / 20%) 27.71%, transparent 57.57%);
+  --viasat-media-scrim: linear-gradient(180deg, transparent 12.32%, rgb(0 0 0 / 40%) 74.19%);
+
+  /* standard EDS tokens, overridden for Viasat pages only */
+  --background-color: #fff;
+  --light-color: var(--viasat-gray-100);
+  --dark-color: var(--viasat-ink);
+  --text-color: var(--viasat-ink);
+  --link-color: var(--viasat-teal);
+  --link-hover-color: var(--viasat-teal);
+  --heading-color: var(--viasat-ink);
+
+  /* fonts: Uni Neue (commercial) -> Red Hat Display; Source Sans Pro -> Source Sans 3 */
+  --heading-font-family: red-hat-display, viasat-heading-fallback, arial, sans-serif;
+  --body-font-family: 'source-sans-3', viasat-body-fallback, arial, sans-serif;
+
+  /* body sizes (source body-md 16/24, body-sm 14/20, legal 12/20, lead 20/28) */
+  --body-font-size-m: 16px;
+  --body-font-size-s: 14px;
+  --body-font-size-xs: 12px;
+  --body-line-height: 1.5;
+  --viasat-lead-font-size: 20px;
+  --viasat-lead-line-height: 28px;
+
+  /* heading sizes, mobile (source heading-3xl/2xl clamps at 390px) */
+  --heading-font-size-xxl: 28px;
+  --heading-font-size-xl: clamp(1.5rem, 1vw + 1.3rem, 2rem);
+  --heading-font-size-l: 24px;
+  --heading-font-size-m: 20px;
+  --heading-font-size-s: 18px;
+  --heading-font-size-xs: 16px;
+  --heading-line-height-xxl: 36px;
+  --heading-line-height-xl: clamp(2.25rem, 4vw + 0.45rem, 2.5rem);
+  --heading-line-height-l: 32px;
+  --heading-line-height-m: 28px;
+  --heading-line-height-s: 24px;
+  --heading-line-height-xs: 20px;
+  --heading-font-weight: 700;
+
+  /* buttons (source bm-button md) */
+  --viasat-button-height: 48px;
+  --viasat-button-padding: 8px 16px;
+  --viasat-button-radius: 8px;
+  --viasat-button-font-size: 16px;
+  --viasat-button-line-height: 20px;
+
+  /* layout */
+  --viasat-content-max-width: 1152px;
+  --viasat-gutter: 16px;
+  --viasat-section-padding: 48px;
+}
+
+@media (width >= 900px) {
+  body.viasatinternet {
+    --heading-font-size-xxl: 40px;
+    --heading-font-size-l: 28px;
+    --heading-line-height-xxl: 48px;
+    --heading-line-height-l: 36px;
+    --viasat-gutter: 32px;
+    --viasat-section-padding: 80px;
+  }
+}
+
+@media (width >= 1200px) {
+  body.viasatinternet {
+    --heading-font-size-xxl: 48px;
+    --heading-line-height-xxl: 56px;
+  }
+}

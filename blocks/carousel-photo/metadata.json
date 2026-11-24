@@ -1,0 +1,27 @@
+{
+  "variantName": "carousel-photo",
+  "baseBlock": "carousel",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Slider of photo cards with title + text overlaid on a gradient",
+    "observed": [
+      "Carousel of 4 photo cards with dark gradient and overlaid title + text"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per slide: [photo | h3 title, paragraph]",
+    "pages": [
+      "plans"
+    ],
+    "sectionStyles": [
+      "orange"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Lifestyle slider on plans (4 slides).",
+  "reuseGuidance": "Author as \"Carousel Photo\".",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/plans/"
+  ]
+}

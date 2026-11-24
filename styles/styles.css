@@ -1,3 +1,5 @@
+@import url('brand.css');
+
 /*
  * Copyright 2020 Adobe. All rights reserved.
  * This file is licensed to you under the Apache License, Version 2.0 (the "License");
@@ -12,27 +14,27 @@
 
 :root {
   /* colors */
-  --background-color: #fff;
-  --light-color: #fff6e1;
-  --dark-color: #141d24;
-  --text-color: #141d24;
-  --link-color: #00768f;
-  --link-hover-color: #00768f;
+  --background-color: white;
+  --light-color: #f8f8f8;
+  --dark-color: #505050;
+  --text-color: #131313;
+  --link-color: #3b63fb;
+  --link-hover-color: #1d3ecf;
 
   /* fonts */
-  --body-font-family: "Source Sans Pro";
-  --heading-font-family: "Uni Neue";
+  --body-font-family: roboto, roboto-fallback, sans-serif;
+  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
 
   /* body sizes */
-  --body-font-size-m: 16px;
-  --body-font-size-s: 14px;
-  --body-font-size-xs: 14px;
+  --body-font-size-m: 22px;
+  --body-font-size-s: 19px;
+  --body-font-size-xs: 17px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 28px;
-  --heading-font-size-xl: 28px;
-  --heading-font-size-l: 24.55px;
-  --heading-font-size-m: 24.55px;
+  --heading-font-size-xxl: 55px;
+  --heading-font-size-xl: 44px;
+  --heading-font-size-l: 34px;
+  --heading-font-size-m: 27px;
   --heading-font-size-s: 24px;
   --heading-font-size-xs: 22px;
 
@@ -40,23 +42,33 @@
   --nav-height: 64px;
 }
 
+/* fallback fonts */
+@font-face {
+  font-family: roboto-condensed-fallback;
+  size-adjust: 88.82%;
+  src: local('Arial');
+}
+
+@font-face {
+  font-family: roboto-fallback;
+  size-adjust: 99.529%;
+  src: local('Arial');
+}
+
 @media (width >= 900px) {
   :root {
     /* body sizes */
-    --body-font-size-m: 16px;
-    --body-font-size-s: 14px;
+    --body-font-size-m: 18px;
+    --body-font-size-s: 16px;
     --body-font-size-xs: 14px;
 
     /* heading sizes */
-    --heading-font-size-xxl: 40px;
-    --heading-font-size-xl: 32px;
+    --heading-font-size-xxl: 45px;
+    --heading-font-size-xl: 36px;
     --heading-font-size-l: 28px;
     --heading-font-size-m: 22px;
     --heading-font-size-s: 20px;
     --heading-font-size-xs: 18px;
-
-    /* nav height */
-    --nav-height: 92px;
   }
 }
 
@@ -75,13 +87,7 @@ body.appear {
 }
 
 header {
-  height: 0;
-}
-
-@media (width >= 900px) {
-  header {
-    height: 44px;
-  }
+  height: var(--nav-height);
 }
 
 header .header,
@@ -318,133 +324,4 @@ main .section.highlight {
   background-color: var(--light-color);
   margin: 0;
   padding: 40px 0;
-}
-
-
-/* ---- viasat template ---- */
-body.viasat {
-  line-height: 1.5;
-}
-
-body.viasat h1,
-body.viasat h2,
-body.viasat h3,
-body.viasat h4 {
-  margin: 0;
-  text-wrap: balance;
-  font-weight: 700;
-  line-height: 1.25;
-}
-
-body.viasat p {
-  margin: 0;
-}
-
-body.viasat main > .section {
-  margin: 0;
-  padding: 0;
-}
-
-body.viasat main > .section > div {
-  box-sizing: border-box;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-}
-
-body.viasat main .section.light,
-body.viasat main .section.dark,
-body.viasat main .section.pad {
-  padding: 32px 0;
-}
-
-body.viasat main .section.light {
-  background-color: var(--light-color);
-}
-
-body.viasat main .section.legal {
-  padding: 82px 0 78px;
-}
-
-body.viasat main .section.legal p {
-  margin: 0 0 16px;
-  font-size: 12px;
-  line-height: 24px;
-}
-
-body.viasat main .section.legal p:last-child {
-  margin-bottom: 0;
-}
-
-body.viasat main .section.center .default-content-wrapper {
-  text-align: center;
-}
-
-body.viasat main .section.center .default-content-wrapper + div {
-  margin-top: 48px;
-}
-
-body.viasat main .section.dark.center .default-content-wrapper + div {
-  margin-top: 16px;
-}
-
-body.viasat main .section.light .columns-wrapper + .columns-wrapper {
-  margin-top: 48px;
-}
-
-body.viasat main .section.compact {
-  padding: 24px 0;
-}
-
-body.viasat main .section.dark {
-  background-color: var(--dark-color);
-  color: #fff;
-}
-
-body.viasat main .section.dark h1,
-body.viasat main .section.dark h2 {
-  color: #fff;
-}
-
-body.viasat main .section.dark a:any-link {
-  color: #fff;
-  text-decoration: underline;
-}
-
-body.viasat main .section .default-content-wrapper > h2 {
-  font-size: var(--heading-font-size-xl);
-  line-height: 40px;
-}
-
-/* buttons */
-body.viasat a.button:any-link {
-  gap: 12px;
-  height: 48px;
-  box-sizing: border-box;
-  border: 0;
-  border-radius: 8px;
-  padding: 8px 16px;
-  background: linear-gradient(111.19deg, #df6901 6.01%, #ffb029 119.04%);
-  color: #fff;
-  font-family: var(--heading-font-family);
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 20px;
-  text-decoration: none;
-}
-
-body.viasat a.button.secondary:any-link {
-  background: #fff;
-  color: var(--text-color);
-}
-
-body.viasat p.button-wrapper {
-  margin: 0;
-}
-
-body.viasat .viasat-arrow {
-  width: 20px;
-  height: 20px;
-  flex: none;
-  fill: currentcolor;
 }

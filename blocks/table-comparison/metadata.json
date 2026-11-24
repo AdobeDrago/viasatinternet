@@ -1,0 +1,44 @@
+{
+  "variantName": "table-comparison",
+  "baseBlock": "table",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Comparison chart: label column plus plan/provider columns, one highlighted column, optional CTA row",
+    "observed": [
+      "Source comparison-chart: plans x features (High-Speed Data, Contract, Professional Installation, What's included, Price) + CTA row",
+      "Source comparison-chart: Viasat Unleashed vs Starlink vs Hughesnet, 6 feature rows (label + sublabel) with check / empty-circle icon cells",
+      "Source comparison-chart: title cell 'Compare protection plans', 3 plan columns (EasyCare highlighted, EasyCare+, EasyCare Premium), 7 feature rows with check / dash cells (2 with 'see list of eligible devices' PDF links), Price row with orange offer text"
+    ]
+  },
+  "contentPattern": {
+    "structure": "row 1: [title | one header cell per plan (eyebrow, name, tagline)]; body rows: [feature label (+ sublabel, optional icon) | value per plan, or :check: / :check-none: icon]; optional last row with an empty first cell: [ | CTA link per plan]",
+    "pages": [
+      "plans",
+      "easycare"
+    ],
+    "sectionStyles": [
+      "centered"
+    ]
+  },
+  "options": [
+    {
+      "class": "highlight-1",
+      "label": "Highlight column 1"
+    },
+    {
+      "class": "highlight-2",
+      "label": "Highlight column 2"
+    },
+    {
+      "class": "highlight-3",
+      "label": "Highlight column 3"
+    }
+  ],
+  "memberVariantIds": [],
+  "usage": "Plan chart (fragment /viasatinternet/fragments/plans-comparison, highlight-2), competitor chart (highlight-1) on plans, protection plans chart on easycare (highlight-1). Icon-only :check: / :check-none: cells get screen reader text \"Included\" / \"Not included\".",
+  "reuseGuidance": "Author as \"Table Comparison (highlight 2)\" etc. Columns are 1-based, the label column is not counted.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/plans/",
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/"
+  ]
+}

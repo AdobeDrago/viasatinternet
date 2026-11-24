@@ -1,0 +1,27 @@
+{
+  "variantName": "cards-addons",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Shadowed photo cards with title, description and a divider + icon offer footer",
+    "observed": [
+      "Three add-on cards: photo, title, description, divider, tag icon + offer text"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per card: [photo | h3 title, description paragraph, offer paragraph starting with an icon (\":tag: Get your first month FREE\")]",
+    "pages": [
+      "plans"
+    ],
+    "sectionStyles": [
+      "cream, centered"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "\"Enhance your online experience\" add-on cards on plans.",
+  "reuseGuidance": "Author as \"Cards Addons\". The last paragraph starting with an icon becomes the offer footer.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/plans/"
+  ]
+}

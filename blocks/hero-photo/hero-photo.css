@@ -1,0 +1,116 @@
+/* full-bleed: the section is the only frame around the photo */
+.hero-photo-container .hero-photo-wrapper {
+  max-width: unset;
+  padding: 0;
+}
+
+/* mobile base: source hero p=200 (32px) block, px-mobile=125 (20px) inline, min-height 400 */
+.hero-photo {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  min-height: 400px;
+  padding: 32px 20px;
+  overflow: hidden;
+  color: var(--viasat-on-dark-text);
+}
+
+/* photo fills the block behind the text */
+.hero-photo .hero-photo-media {
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+}
+
+.hero-photo .hero-photo-media picture {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-photo .hero-photo-media img {
+  display: block;
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+/* source picture[data-overlay="dark"]::after: black at 25% keeps the white copy readable */
+.hero-photo .hero-photo-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgb(0 0 0 / 25%);
+}
+
+.hero-photo .hero-photo-content {
+  width: 100%;
+  max-width: 416px;
+  text-align: center;
+}
+
+/* source copy is plain white on the photo: no shadow (overlay provides contrast) */
+.hero-photo .hero-photo-content :is(h1, h2, h3, p, li) {
+  color: var(--viasat-on-dark-text);
+  text-shadow: none;
+}
+
+.hero-photo .hero-photo-content > * {
+  margin: 0;
+}
+
+/* source box gap=150: 24px between heading, text and actions; 16px between paragraphs */
+.hero-photo .hero-photo-content > * + * {
+  margin-top: 24px;
+}
+
+.hero-photo .hero-photo-content > p + p {
+  margin-top: 16px;
+}
+
+.hero-photo .hero-photo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+
+.hero-photo .hero-photo-actions .button-wrapper {
+  margin: 0;
+}
+
+/* optional "left" variant: source picture[data-overlay="dark-gradient"], copy in the left half */
+.hero-photo.left .hero-photo-content {
+  max-width: none;
+}
+
+@media (width >= 900px) {
+  /* source data-desktop-height="thin": 600px; content box 416px centered */
+  .hero-photo {
+    min-height: 600px;
+    padding: 32px;
+  }
+
+  .hero-photo.left {
+    justify-content: flex-start;
+    padding-inline: max(32px, calc((100% - 1152px) / 2));
+  }
+
+  .hero-photo.left .hero-photo-media::after {
+    background-color: transparent;
+    background-image: linear-gradient(90deg, var(--viasat-gray-1000) 18.65%, rgb(32 46 57 / 0%) 50%);
+  }
+
+  .hero-photo.left .hero-photo-content {
+    max-width: 568px;
+    text-align: start;
+  }
+
+  .hero-photo.left .hero-photo-actions {
+    justify-content: flex-start;
+  }
+}

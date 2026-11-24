@@ -1,0 +1,32 @@
+.address-lookup {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.address-lookup .address-lookup-prompt > :first-child {
+  margin-top: 0;
+}
+
+.address-lookup .address-lookup-prompt > :last-child {
+  margin-bottom: 0;
+}
+
+@media (width >= 900px) {
+  .address-lookup {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 32px;
+  }
+
+  .address-lookup .address-lookup-prompt {
+    flex: 1 1 50%;
+  }
+
+  .address-lookup .address-lookup-lookup {
+    flex: 1 1 50%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "variantName": "columns-media",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "White rounded card with an image and a text column side by side",
+    "observed": [
+      "Source card: photo (family on couch) + h2, paragraph, check-mark list, CTA 'Explore home internet plans', footnotes",
+      "Source card: h2 'Keep your business online', paragraph, check-mark list, CTA 'Explore business internet plans' + photo on the right",
+      "White rounded card: h2 'Save $360 for your first 12 months*', subheading, CTA 'Shop plans', disclaimer | photo"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per card: [image | heading, paragraph, check-mark list, CTA, footnotes] or [text | image]; column order follows the cells on desktop, the image stacks first on mobile",
+    "pages": [
+      "home",
+      "plans"
+    ],
+    "sectionStyles": [
+      "cream",
+      "cream",
+      "cream, centered"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Home and business feature cards (home), savings promo card (plans).",
+  "reuseGuidance": "Author as \"Columns Media\". List items render with a check mark.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/",
+    "https://www.viasatinternet.com/satellite-internet/plans/"
+  ]
+}

@@ -1,0 +1,251 @@
+/*
+ * Cards (icon). Values measured from viasatinternet.com (bm tile / card components):
+ * - icon tiles: white panel (radius 16, padding 64), tiles 48px apart, icon 28px,
+ *   16px between icon, title (heading-sm 18/24), text (body-md, secondary) and arrow link
+ * - 4 or 8 tiles: 4 per row, heading-md 20/28 title, primary text
+ * - text-only step cards: centered, 24px apart, heading-md title, CTA button at the bottom
+ * - centered (option, or 4 cards in a centered section): centered 48px icon, bold short text
+ */
+
+/* ---------- icon tiles in a white panel (default) ---------- */
+.cards-icon {
+  --text-color: var(--viasat-ink);
+  --heading-color: var(--viasat-ink);
+  --link-color: var(--viasat-teal);
+  --viasat-icon-filter: none;
+
+  border-radius: 16px;
+  padding: 64px;
+  background-color: var(--viasat-white);
+  color: var(--viasat-ink);
+  text-align: start;
+}
+
+.cards-icon > ul {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 48px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.cards-icon > ul > li {
+  display: flex;
+  flex-direction: column;
+  margin: 0;
+}
+
+.cards-icon .cards-icon-card-body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+}
+
+.cards-icon .cards-icon-card-body > * {
+  margin: 0;
+}
+
+.cards-icon .cards-icon-icon {
+  line-height: 0;
+}
+
+.cards-icon .cards-icon-icon .icon {
+  display: inline-block;
+  width: 28px;
+  height: 28px;
+}
+
+.cards-icon .cards-icon-icon .icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.cards-icon .cards-icon-card-body h3 {
+  color: var(--viasat-ink);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-s);
+  font-weight: 700;
+  line-height: var(--heading-line-height-s);
+}
+
+.cards-icon .cards-icon-card-body > p {
+  color: var(--viasat-text-secondary);
+  font-size: var(--body-font-size-m);
+  line-height: 24px;
+}
+
+/* arrow text link (source bm-button tertiary: 16/20 bold, 20px arrow, 8px gap) */
+.cards-icon .cards-icon-card-body > p.cards-icon-link {
+  color: var(--viasat-ink);
+}
+
+main .cards-icon .cards-icon-link a.button:any-link,
+main .cards-icon .cards-icon-link a:any-link:not(.button) {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 0;
+  border-radius: 4px;
+  padding: 0;
+  background: none;
+  color: var(--viasat-ink);
+  font-family: var(--heading-font-family);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 20px;
+  text-decoration: none;
+}
+
+main .cards-icon .cards-icon-link a:any-link:hover {
+  text-decoration: underline;
+}
+
+main .cards-icon .cards-icon-link a:not(.button)::after {
+  content: '';
+  flex: none;
+  width: 20px;
+  height: 20px;
+  background-color: currentcolor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4l-1.41 1.41L16.17 11H4v2h12.17l-5.58 5.59L12 20l8-8z'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
+/* 4 or 8 tiles (add-ons): larger title, primary text */
+.cards-icon.cards-icon-4-cols .cards-icon-card-body h3 {
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
+}
+
+.cards-icon.cards-icon-4-cols .cards-icon-card-body > p {
+  color: var(--viasat-ink);
+}
+
+/* source rows/boxes keep 48px from the content above them */
+:where(.section > div:not(:first-child)) > .cards-icon {
+  margin-top: 48px;
+}
+
+/*
+ * add-ons: the source shows the media row and the tiles in one white panel; the tiles
+ * continue the columns-media panel right above them (its 32px bottom padding + 32px = 64px gap)
+ */
+:where(.section > div:has(> .columns-media) + div) > .cards-icon {
+  margin-top: 0;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+  padding-top: 32px;
+}
+
+/* ---------- text-only step cards (satellite-internet, rural-internet) ---------- */
+.cards-icon.cards-icon-text-only {
+  --text-color: inherit;
+  --heading-color: inherit;
+  --link-color: inherit;
+  --viasat-icon-filter: inherit;
+
+  border-radius: 0;
+  padding: 0;
+  background: none;
+  color: inherit;
+  text-align: center;
+}
+
+.cards-icon.cards-icon-text-only > ul {
+  gap: 24px;
+}
+
+.cards-icon.cards-icon-text-only .cards-icon-card-body {
+  align-items: center;
+}
+
+.cards-icon.cards-icon-text-only .cards-icon-card-body h3 {
+  color: inherit;
+  font-size: var(--heading-font-size-m);
+  line-height: var(--heading-line-height-m);
+}
+
+.cards-icon.cards-icon-text-only .cards-icon-card-body > p {
+  color: inherit;
+}
+
+/* the CTA sits 24px under the text and lines up at the bottom of the row */
+.cards-icon.cards-icon-text-only .cards-icon-card-body > p.cards-icon-link {
+  margin-top: auto;
+  padding-top: 8px;
+}
+
+main .cards-icon.cards-icon-text-only .cards-icon-link a.button:is(.primary, .secondary, .accent) {
+  min-height: var(--viasat-button-height);
+  border-radius: var(--viasat-button-radius);
+  padding: var(--viasat-button-padding);
+  gap: 4px;
+}
+
+main .cards-icon.cards-icon-text-only .cards-icon-link a.button.accent {
+  background: var(--viasat-cta-gradient);
+  color: var(--viasat-white);
+}
+
+main .cards-icon.cards-icon-text-only .cards-icon-link a.button.accent:hover {
+  background: var(--viasat-cta-gradient-hover);
+  text-decoration: none;
+}
+
+/* ---------- centered cards with a large icon (CAF II) ---------- */
+.cards-icon.centered,
+.section.centered .cards-icon.cards-icon-4-cols:not(.cards-icon-text-only) {
+  padding: 80px;
+  text-align: center;
+}
+
+.cards-icon.centered > ul,
+.section.centered .cards-icon.cards-icon-4-cols:not(.cards-icon-text-only) > ul {
+  justify-content: center;
+}
+
+.cards-icon.centered .cards-icon-card-body,
+.section.centered .cards-icon.cards-icon-4-cols:not(.cards-icon-text-only) .cards-icon-card-body {
+  align-items: center;
+}
+
+.cards-icon.centered .cards-icon-icon,
+.section.centered .cards-icon.cards-icon-4-cols:not(.cards-icon-text-only) .cards-icon-icon {
+  margin-bottom: 8px;
+}
+
+.cards-icon.centered .cards-icon-icon .icon,
+.section.centered .cards-icon.cards-icon-4-cols:not(.cards-icon-text-only) .cards-icon-icon .icon {
+  width: 48px;
+  height: 48px;
+}
+
+.cards-icon.centered .cards-icon-card-body > p:not(.cards-icon-icon),
+.section.centered .cards-icon.cards-icon-4-cols:not(.cards-icon-text-only) .cards-icon-card-body > p:not(.cards-icon-icon) {
+  color: var(--viasat-ink);
+  font-family: var(--heading-font-family);
+  font-size: var(--heading-font-size-xs);
+  font-weight: 700;
+  line-height: var(--heading-line-height-xs);
+}
+
+@media (width >= 600px) {
+  .cards-icon > ul {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .cards-icon.cards-icon-text-only > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .cards-icon > ul {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .cards-icon.cards-icon-4-cols > ul {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}

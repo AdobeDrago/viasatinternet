@@ -1,0 +1,27 @@
+{
+  "variantName": "cards-media",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Frameless cards: rounded photo above eyebrow, title, description and bold offer line",
+    "observed": [
+      "Three frameless cards: rounded photo on top, eyebrow (e.g. 'SUPPORT FOR YOUR VIASAT SERVICE & EQUIPMENT'), title (EasyCare / EasyCare+ / EasyCare Premium), description, bold offer line + price"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per card: [photo | eyebrow paragraph, h3 title, description paragraph, offer paragraph with strong]",
+    "pages": [
+      "easycare"
+    ],
+    "sectionStyles": [
+      "cream"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "EasyCare option cards; also satellite-internet, cyberprotect, caf-ii, rural-internet.",
+  "reuseGuidance": "Author as \"Cards Media\". Paragraphs before the heading are eyebrows; a last paragraph containing strong is the offer line.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/"
+  ]
+}

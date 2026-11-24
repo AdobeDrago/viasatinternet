@@ -1,0 +1,31 @@
+{
+  "variantName": "columns-callout",
+  "baseBlock": "columns",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Slim dark rounded callout bar: message left, single action right",
+    "observed": [
+      "Dark rounded bar: highlighted 'Not sure which plan is right for you?' + text | phone CTA 'Call 1-855-393-3302'",
+      "Dark teal rounded bar: 'Choose your internet plan, then add the EasyCare option ... Log in to My Viasat to add EasyCare.' | button 'Shop internet plans'"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row: [message (strong highlight + text, inline links allowed) | link/button (e.g. \":phone: Call 1-855-393-3302\" -> tel:)]",
+    "pages": [
+      "plans",
+      "easycare"
+    ],
+    "sectionStyles": [
+      "cream, centered",
+      "cream"
+    ]
+  },
+  "options": [],
+  "memberVariantIds": [],
+  "usage": "Plan-help bar (plans), EasyCare shop bar (easycare).",
+  "reuseGuidance": "Author as \"Columns Callout\". The cell holding only links gets .columns-callout-action-col. Panel color differences (navy vs teal) belong to the design pass.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/plans/",
+    "https://www.viasatinternet.com/satellite-internet/add-ons/easycare/"
+  ]
+}

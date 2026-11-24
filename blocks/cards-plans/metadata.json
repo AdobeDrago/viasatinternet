@@ -1,0 +1,40 @@
+{
+  "variantName": "cards-plans",
+  "baseBlock": "cards",
+  "canonicalModel": "standalone",
+  "visualCharacteristics": {
+    "purpose": "Pricing cards (no image) with eyebrow, plan name, price, feature list, tagline, price-lock note and CTA; emits Product/Offer JSON-LD",
+    "observed": [
+      "Three plan cards (Essentials, Unleashed, Unleashed Max): eyebrow, plan name, 'Starting at', price, term, feature list, tagline, price-lock note, CTA"
+    ]
+  },
+  "contentPattern": {
+    "structure": "one row per plan, one cell: eyebrow paragraph, h3 plan name, \"Starting at\", price paragraph with strong ($39.99/mo.), term, ul of features, tagline paragraph, \":lock: ...\" note, CTA link",
+    "pages": [
+      "plans"
+    ],
+    "sectionStyles": [
+      "cream, centered"
+    ]
+  },
+  "options": [
+    {
+      "class": "featured-1",
+      "label": "Highlight plan 1"
+    },
+    {
+      "class": "featured-2",
+      "label": "Highlight plan 2"
+    },
+    {
+      "class": "featured-3",
+      "label": "Highlight plan 3"
+    }
+  ],
+  "memberVariantIds": [],
+  "usage": "Plan cards in fragment /viasatinternet/fragments/plans (with ** / *** footnotes). Each card with a heading and a strong $ price adds a Product (name, description = tagline, Offer price/priceCurrency USD/url = CTA) to <script id=\"product-jsonld\"> via scripts/structured-data.js upsertProductJsonLd().",
+  "reuseGuidance": "Author as \"Cards Plans (featured 2)\" to highlight the BEST VALUE (2nd) card. The price must be a paragraph with strong, not a heading.",
+  "sourceUrls": [
+    "https://www.viasatinternet.com/satellite-internet/plans/"
+  ]
+}
